@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Agent Runtime Build
 
 on:
  workflow_dispatch:

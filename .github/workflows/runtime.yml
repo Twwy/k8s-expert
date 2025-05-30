@@ -32,9 +32,13 @@ jobs:
           username: ${{ github.actor }} # 或者 github.repository_owner
           password: ${{ secrets.GITHUB_TOKEN }} # GITHUB_TOKEN 自动由 GitHub Actions 提供
 
+      - name: downcase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: ./runtime/${{github.event.inputs.agent}}
           file: ./runtime/${{github.event.inputs.agent}}/Dockerfile
-          tags: ghcr.io/${{ toLower(github.repository) }}/runtime-${{github.event.inputs.agent}}:latest
+          tags: ghcr.io/${REPO}/runtime-${{github.event.inputs.agent}}:latest

@@ -25,19 +25,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4 # 检出你的代码
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          # 可选: 指定 buildx 版本
-          # version: v0.10.0
-          # 可选: 安装 buildkitd
-          # install: true
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      #   with:
+      #     # 可选: 指定 buildx 版本
+      #     # version: v0.10.0
+      #     # 可选: 安装 buildkitd
+      #     # install: true
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -46,30 +40,13 @@ jobs:
           username: ${{ github.actor }} # 或者 github.repository_owner
           password: ${{ secrets.GITHUB_TOKEN }} # GITHUB_TOKEN 自动由 GitHub Actions 提供
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/my-app # 推送到 Docker Hub 的镜像名
-            ghcr.io/${{ github.repository_owner }}/my-app # 推送到 GHCR 的镜像名
-          tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha,prefix=,suffix=,format=short # git sha 作为标签
-            type=raw,value=latest,enable={{is_default_branch}} # 如果是默认分支 (main), 则打上 latest 标签
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: ./runtime/${{github.event.inputs.agent}}
           file: ./Dockerfile # Dockerfile 的路径
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: latest
+          labels: ghcr.io/${{ github.repository_owner }}/runtime-${{github.event.inputs.agent}}-${{github.event.repository.id}}:${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64 # 可选: 构建多平台镜像
           # cache-from: type=gha # 可选: 启用 GitHub Actions 缓存
           # cache-to: type=gha,mode=max # 可选: 启用 GitHub Actions 缓存

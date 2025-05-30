@@ -1,22 +1,16 @@
 name: Docker Image CI
 
-# 触发工作流程的事件
 on:
- workflow_dispatch: # 只允许手动触发
-   inputs: # （可选）如果你希望手动触发时能传入参数
-     logLevel:
-       description: 'Log level'
+ workflow_dispatch:
+   inputs:
+     agent:
+       description: '智能体'
        required: false
-       default: 'warning'
+       default: 'executor'
        type: choice
        options:
-       - info
-       - warning
-       - debug
-     tags:
-       description: 'Test scenario tags'
-       required: false
-       type: string
+       - executor
+       - planner
 
 jobs:
   build-and-push:

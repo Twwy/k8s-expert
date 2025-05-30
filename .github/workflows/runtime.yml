@@ -36,9 +36,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./runtime/${{github.event.inputs.agent}}
-          file: ./Dockerfile # Dockerfile 的路径
-          tags: latest
-          labels: ghcr.io/${{ github.repository_owner }}/runtime-${{github.event.inputs.agent}}-${{github.event.repository.id}}:${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64 # 可选: 构建多平台镜像
-          # cache-from: type=gha # 可选: 启用 GitHub Actions 缓存
-          # cache-to: type=gha,mode=max # 可选: 启用 GitHub Actions 缓存
+          file: ./runtime/${{github.event.inputs.agent}}/Dockerfile
+          tags: ghcr.io/${{ github.repository }}/runtime-${{github.event.inputs.agent}}:latest

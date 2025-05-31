@@ -1,0 +1,31 @@
+name: Ask Agent
+
+on:
+ workflow_dispatch:
+   inputs:
+     question:
+       description: '问题'
+       required: true
+       type: string
+
+jobs:
+  create_thought_branch:
+    runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
+
+    permissions:
+      contents: write      # 需要读取并写入仓库内容
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Push thought branch
+        run: |
+          timestamp=$(date +'%Y%m%d%H%M%S')
+          rm chat
+          mkdir chat
+          mkdir "chat/user_${timestamp}"
+          echo "${{github.event.inputs.question}}" > "chat/user_${timestamp}/message.md"
+          git add chat
+          git commit -m "thought question"
+          git push origin ${{github.ref_name}}:ask-${{github.run_id}}

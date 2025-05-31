@@ -21,6 +21,8 @@ jobs:
         
       - name: Push thought branch
         run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           timestamp=$(date +'%Y%m%d%H%M%S')
           rm chat
           mkdir chat

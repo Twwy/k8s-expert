@@ -1,0 +1,50 @@
+name: Executor
+
+on:
+ workflow_dispatch:
+   inputs:
+     test:
+       description: 'test'
+       required: false
+       type: string
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
+    container:
+      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-planner:latest
+
+    permissions:
+      contents: write      # 需要读取并写入仓库内容
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Push thought branch
+        run: |
+
+
+          set -e
+
+          EXEC_BRANCH="${{github.ref_name}}"
+          TASK_NAME=$(echo "$EXEC_BRANCH" | cut -d'/' -f2)
+          SRC_BRANCH="${EXEC_BRANCH##*/}"
+
+          git config --global user.email "alisre-deploy@alibaba-inc.com"
+          git config --global user.name "${{pipeline.inst.creator}}"
+          
+          cat <<DELIMITER > /etc/gitops.yaml
+          llm_model: qwen-max
+          llm_api_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+          llm_api_key: ${{secrets.DASHSCOPE_API_KEY}}
+          work_root_path: $(pwd)
+          task_path: $(pwd)/task/${TASK_NAME}
+          git_user_email: "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git_user_name: "${{ github.actor }}"
+          task_name: ${TASK_NAME}
+          DELIMITER
+          
+          python3 -m gitops.agent.executor
+          
+          git push origin ${EXEC_BRANCH}:${SRC_BRANCH}

@@ -45,6 +45,6 @@ jobs:
           task_name: ${TASK_NAME}
           DELIMITER
           
-          python3 -m gitops.agent.executor
+          python3 -m agitops.agent.executor
           
           git push origin ${EXEC_BRANCH}:${SRC_BRANCH}

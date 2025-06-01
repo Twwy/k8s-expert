@@ -38,4 +38,5 @@ jobs:
         with:
           context: ./runtime/${{github.event.inputs.agent}}
           file: ./runtime/${{github.event.inputs.agent}}/Dockerfile
+          platforms: linux/amd64,linux/arm64
           tags: ghcr.io/mind-${{github.event.repository.id}}/runtime-${{github.event.inputs.agent}}:latest

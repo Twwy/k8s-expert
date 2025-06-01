@@ -26,9 +26,10 @@ jobs:
 
           set -e
           EXEC_BRANCH="${{github.ref_name}}"
+          ROOT_PATH=$(pwd)
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-          git config --global --add safe.directory ./
+          git config --global --add safe.directory ${ROOT_PATH}
           
           cat <<DELIMITER > /etc/gitops.yaml
           llm_model: qwen-max

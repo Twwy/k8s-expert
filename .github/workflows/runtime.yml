@@ -39,3 +39,5 @@ jobs:
           context: ./runtime/${{github.event.inputs.agent}}
           file: ./runtime/${{github.event.inputs.agent}}/Dockerfile
           tags: ghcr.io/mind-${{github.event.repository.id}}/runtime-${{github.event.inputs.agent}}:latest
+          push: true
+

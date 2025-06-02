@@ -30,9 +30,11 @@ jobs:
           EXEC_BRANCH="${{github.ref_name}}"
           TASK_NAME=$(echo "$EXEC_BRANCH" | cut -d'/' -f2)
           SRC_BRANCH="${EXEC_BRANCH##*/}"
+          ROOT_PATH=$(pwd)
 
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "{{ github.actor }}"
+          git config --global --add safe.directory ${ROOT_PATH}
           
           cat <<DELIMITER > /etc/gitops.yaml
           llm_model: qwen-max

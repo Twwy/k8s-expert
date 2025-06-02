@@ -50,3 +50,4 @@ jobs:
           python3 -m agitops.agent.executor
           
           git push origin ${EXEC_BRANCH}:${SRC_BRANCH}
+          git push origin --delete ${EXEC_BRANCH}

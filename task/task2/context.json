@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_96a867de0b1c4384b5efd8",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "成功更新了 `sreworks/charts/appmanager/values.yaml` 文件中的 `jwtSecretKey` 字段，使用了之前生成的安全随机密钥 `piLpQz8eP++kw/g/g6jMucAyr0eBE946WdX0r1tH8vo=`。\n\n接下来，我将检查 `server-configmap.yaml` 文件以确保它正确引用了这个设置。根据 Helm 的模板语法，我们期望在 `server-configmap.yaml` 中看到类似如下的内容：\n\n```yaml\n{{ .Values.jwtSecretKey }}\n```\n\n这允许 Helm 在渲染模板时自动替换为 `values.yaml` 中定义的值。现在，我将查看 `server-configmap.yaml` 文件的相关部分来确认这一点。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_2da53f905bd143159a8798",
+                "function": {
+                    "arguments": "{\"shell\": \"grep -C 5 'appmanager.server.jwtSecretKey' sreworks/charts/appmanager/templates/server-configmap.yaml || echo 'No specific match found, showing the part of the file that uses jwtSecretKey if any:'; grep -C 5 '{{ .Values.jwtSecretKey }}' sreworks/charts/appmanager/templates/server-configmap.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_2da53f905bd143159a8798",
+        "content": "ret:1\nstdout:\n  APPMANAGER_ROCKETMQ_NAMESRV_ENDPOINT: {{ template \"server.rocketmq.namesrv\" . }}\n  APPMANAGER_ACCESS_ID: {{ .Values.server.accessId | quote }}\n  APPMANAGER_ACCESS_SECRET: {{ .Values.server.accessSecret | quote }}\n  APPMANAGER_CLIENT_ID: {{ .Values.server.clientId | quote }}\n  APPMANAGER_CLIENT_SECRET: {{ .Values.server.clientSecret | quote }}\n  APPMANAGER_JWT_SECRET_KEY: {{ required \"appmanager.server.jwtSecretKey is required\"  .Values.server.jwtSecretKey | quote }}\n  CLOUD_TYPE: {{ .Values.server.cloudType | default \"PaaS\" | quote }}\n  JVM_XMX: {{ .Values.server.jvmXMX | default \"4000m\" | quote }}\n  DOCKER_HOST: {{ .Values.server.docker.host | default \"tcp://127.0.0.1:2375\" | quote }}\n  DOCKER_REGISTRY: {{ .Values.server.docker.registry | default \"reg.docker.alibaba-inc.com\" | quote }}\n  DOCKER_NAMESPACE: {{ .Values.server.docker.namespace | default \"sw\" | quote }}\n--\n  ACCOUNT_SUPER_CLIENT_SECRET: {{ .Values.gateway.account_super_client_secret | default \"default\" | quote }}\n  ACCOUNT_SUPER_ID: {{ .Values.gateway.account_super_id | default \"admin\" | quote }}\n  ACCOUNT_SUPER_SECRET_KEY: {{ .Values.gateway.account_super_secret_key | default \"default-key\" | quote }} \n \n{{- end -}}\n  appmanager.server.jwtSecretKey: myTempJwtSecretKey1234567890\n\nstderr:\n\n"
     }
 ]

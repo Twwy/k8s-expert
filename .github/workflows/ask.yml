@@ -40,35 +40,35 @@ jobs:
           echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
 
-  branch_plan:
-    runs-on: ubuntu-latest
-    needs: create_thought_branch
-    permissions:
-      contents: read
+  # branch_plan:
+  #   runs-on: ubuntu-latest
+  #   needs: create_thought_branch
+  #   permissions:
+  #     contents: read
     
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GIT_REPO_TOKEN }}
-          fetch-depth: 0
-      - name: Read branch plan
-        run: |
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         token: ${{ secrets.GIT_REPO_TOKEN }}
+  #         fetch-depth: 0
+  #     - name: Read branch plan
+  #       run: |
 
-          for i in $(seq 1 60)
-          do
-            echo "--- 第 $i 次 ---"
-            git pull        
-            # 检查第一行是否为 "```"
-            if head -n 1 README.md|grep '\`\`\`'; then
-              cat README.md >> $GITHUB_STEP_SUMMARY
-              exit 0 # 成功退出
-            else
-              echo "wait plan in README.md"
-              sleep 5
-            fi
+  #         for i in $(seq 1 60)
+  #         do
+  #           echo "--- 第 $i 次 ---"
+  #           git pull        
+  #           # 检查第一行是否为 "```"
+  #           if head -n 1 README.md|grep '\`\`\`'; then
+  #             cat README.md >> $GITHUB_STEP_SUMMARY
+  #             exit 0 # 成功退出
+  #           else
+  #             echo "wait plan in README.md"
+  #             sleep 5
+  #           fi
 
-          done        
+  #         done        
 
 
         

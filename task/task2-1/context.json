@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_05b8af2280b046b19528de",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: openssl: not found\n\n"
+    },
+    {
+        "content": "看起来在当前环境中没有找到 `openssl` 工具。不过，我们可以尝试使用 Python 来生成一个强健且唯一的 JWT Secret Key。如果 Python 可用的话，我将使用它来生成密钥。让我们先检查一下 Python 是否已安装。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_aa55a11d45ed4c43bd0fa9",
+                "function": {
+                    "arguments": "{\"shell\": \"python3 -c 'import secrets; print(secrets.token_urlsafe(32))'\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_aa55a11d45ed4c43bd0fa9",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: python3: not found\n\n"
     }
 ]

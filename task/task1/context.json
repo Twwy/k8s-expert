@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_a1d39eeab470473a8baafd",
         "content": "ret:0\nstdout:\nglobal:\n  storageClass: \"alicloud-disk-available\"\n\n  images:\n    registry: sreworks-registry.cn-beijing.cr.aliyuncs.com/sreworks\n    tag: v1.2\n    imagePullPolicy: Always \n\nhome:\n  url: \"https://sreworks.ingress.com\"\n  endpoint: \n\noperator:\n  globalListener: true\n\nimages:\n  kaniko: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/kaniko-executor:latest\n\nserver:\n  sreworksEnvs: false\n  rbac: default\n  database:\n    #host: \n    port: 3306\n    user: 'root'\n    password: 'bGuwsAWQM6K'\n    name: sreworks_appmanager\n  rocketmq:\n    namesrv: \n  package:\n    driver: \"minio\"\n    #endpoint: \n    accessKey: \"XmizyTRKhgYTrVkK\"\n    secretKey: \"Df229gtwZ4bssMzK23VJXq9vrGqpxdHA\"\n    bucketName: \"abm-oxs-appmanager-daily\"\n  dag:\n    bucketName: \"abm-oxs-appmanager-daily-dag\"\n  redis:\n    #host:\n    port: 6379\n    database: 1\n    password: 'siJEULmQYQ'\n  env: \"daily\"\n  cloudType: \"PaaS\"\n  cluster: \"DAILY\"\n  jvmXMX: \"4000m\"\n  accessId: superuser\n  accessSecret: yJfIYmjAiCL0ondV3kY7e5x6kVTpvC3h\n  clientId: superclient\n  clientSecret: stLCjCPKbWmki65DsAj2jPoeBLPimpJa\n  #jwtSecretKey: 3d8e06065426\n  kafkaBrokerPort: 9092\n  enableAuth: true\n  docker:\n    enableKaniko: true\n    secret: \"server-docker-secret\"\n    account: sreworks\n    password: sreworksDocker123q\n    registry: registry.cn-zhangjiakou.aliyuncs.com\n    namespace: builds\n\ninstallMode: default\n\ngateway:\n  account_super_client_id: common\n  account_super_client_secret: default\n  account_super_id: admin\n  account_super_secret_key: default\n\nstderr:\n\n"
+    },
+    {
+        "content": "在`appmanager`子chart的`values.yaml`文件中，我发现确实有一个注释掉的`jwtSecretKey`配置项。我们需要取消注释该行，并设置提供的随机字符串 `xKbtt82s3WQDcqYKPkP0b4xD3xKHXztyg8H5GE4RptY=` 作为其值。\n\n现在我将更新`values.yaml`文件，添加这个密钥。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_6dc5bee58e4a443498c302",
+                "function": {
+                    "arguments": "{\"shell\":\"sed -i 's/# jwtSecretKey: .*/jwtSecretKey: xKbtt82s3WQDcqYKPkP0b4xD3xKHXztyg8H5GE4RptY=/' sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_6dc5bee58e4a443498c302",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

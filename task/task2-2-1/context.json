@@ -186,5 +186,25 @@
         "role": "tool",
         "tool_call_id": "call_c12ab6c80dac4ed3bac257",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "现在，我再次尝试更新了 `sreworks/charts/appmanager/values.yaml` 文件中的 `jwtSecretKey` 配置项。这次应该已经成功取消注释并设置了值为 `myTempJwtSecretKey1234567890`。\n\n让我们再次确认 `values.yaml` 文件中是否已正确更新：",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_ccc26f47147a4b48838d9c",
+                "function": {
+                    "arguments": "{\"shell\": \"cat sreworks/charts/appmanager/values.yaml | grep -C 5 'jwtSecretKey'\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_ccc26f47147a4b48838d9c",
+        "content": "ret:0\nstdout:\n  jvmXMX: \"4000m\"\n  accessId: superuser\n  accessSecret: yJfIYmjAiCL0ondV3kY7e5x6kVTpvC3h\n  clientId: superclient\n  clientSecret: stLCjCPKbWmki65DsAj2jPoeBLPimpJa\n  #jwtSecretKey: 3d8e06065426\n  kafkaBrokerPort: 9092\n  enableAuth: true\n  docker:\n    enableKaniko: true\n    secret: \"server-docker-secret\"\n\nstderr:\n\n"
     }
 ]

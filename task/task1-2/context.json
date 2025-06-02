@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_e03f26edb0a742e8bd50b2",
         "content": "ret:0\nstdout:\n/usr/bin/wget\n\nstderr:\n\n"
+    },
+    {
+        "content": "`wget` 已经安装在这个环境中了，所以我可以直接使用它来访问SREWorks的GitHub发布页面。现在我将尝试获取sreworks-0.1.1.tgz版本的发行说明和文档链接。让我们开始吧。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_4f90932ebfaf436191071c",
+                "function": {
+                    "arguments": "{\"shell\": \"wget -qO- https://api.github.com/repos/alibaba/sreworks/releases | grep -o 'https://github.com/.*sreworks-0.1.1\\\\.tgz' | head -n 1\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_4f90932ebfaf436191071c",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

@@ -106,5 +106,25 @@
         "role": "tool",
         "tool_call_id": "call_c025324bee8d446bbcf240",
         "content": "ret:0\nstdout:\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/main/x86_64/APKINDEX.tar.gz\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/community/x86_64/APKINDEX.tar.gz\n(1/1) Installing openssl (3.5.0-r0)\nExecuting busybox-1.37.0-r18.trigger\nOK: 25 MiB in 44 packages\n\nstderr:\n\n"
+    },
+    {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_09beea87b6d24f60af20c2",
+                "function": {
+                    "arguments": "{\"shell\": \"openssl rand -base64 32\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_09beea87b6d24f60af20c2",
+        "content": "ret:0\nstdout:\nxKbtt82s3WQDcqYKPkP0b4xD3xKHXztyg8H5GE4RptY=\n\nstderr:\n\n"
     }
 ]

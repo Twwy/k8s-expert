@@ -48,7 +48,7 @@ server:
   accessSecret: yJfIYmjAiCL0ondV3kY7e5x6kVTpvC3h
   clientId: superclient
   clientSecret: stLCjCPKbWmki65DsAj2jPoeBLPimpJa
-  jwtSecretKey: myTempJwtSecretKey1234567890
+  jwtSecretKey: piLpQz8eP%2B%2Bkw%2Fg%2Fg6jMucAyr0eBE946WdX0r1tH8vo%3D
   kafkaBrokerPort: 9092
   enableAuth: true
   docker:
@@ -66,4 +66,4 @@ gateway:
   account_super_client_secret: default
   account_super_id: admin
   account_super_secret_key: default
-jwtSecretKey: myTempJwtSecretKey1234567890
+jwtSecretKey: piLpQz8eP%2B%2Bkw%2Fg%2Fg6jMucAyr0eBE946WdX0r1tH8vo%3D

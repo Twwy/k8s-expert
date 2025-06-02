@@ -58,4 +58,4 @@ data:
   ACCOUNT_SUPER_SECRET_KEY: {{ .Values.gateway.account_super_secret_key | default "default-key" | quote }} 
  
 {{- end -}}
-  appmanager.server.jwtSecretKey: myTempJwtSecretKey1234567890
+  appmanager.server.jwtSecretKey: {{ .Values.jwtSecretKey }}

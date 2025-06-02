@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_2da53f905bd143159a8798",
         "content": "ret:1\nstdout:\n  APPMANAGER_ROCKETMQ_NAMESRV_ENDPOINT: {{ template \"server.rocketmq.namesrv\" . }}\n  APPMANAGER_ACCESS_ID: {{ .Values.server.accessId | quote }}\n  APPMANAGER_ACCESS_SECRET: {{ .Values.server.accessSecret | quote }}\n  APPMANAGER_CLIENT_ID: {{ .Values.server.clientId | quote }}\n  APPMANAGER_CLIENT_SECRET: {{ .Values.server.clientSecret | quote }}\n  APPMANAGER_JWT_SECRET_KEY: {{ required \"appmanager.server.jwtSecretKey is required\"  .Values.server.jwtSecretKey | quote }}\n  CLOUD_TYPE: {{ .Values.server.cloudType | default \"PaaS\" | quote }}\n  JVM_XMX: {{ .Values.server.jvmXMX | default \"4000m\" | quote }}\n  DOCKER_HOST: {{ .Values.server.docker.host | default \"tcp://127.0.0.1:2375\" | quote }}\n  DOCKER_REGISTRY: {{ .Values.server.docker.registry | default \"reg.docker.alibaba-inc.com\" | quote }}\n  DOCKER_NAMESPACE: {{ .Values.server.docker.namespace | default \"sw\" | quote }}\n--\n  ACCOUNT_SUPER_CLIENT_SECRET: {{ .Values.gateway.account_super_client_secret | default \"default\" | quote }}\n  ACCOUNT_SUPER_ID: {{ .Values.gateway.account_super_id | default \"admin\" | quote }}\n  ACCOUNT_SUPER_SECRET_KEY: {{ .Values.gateway.account_super_secret_key | default \"default-key\" | quote }} \n \n{{- end -}}\n  appmanager.server.jwtSecretKey: myTempJwtSecretKey1234567890\n\nstderr:\n\n"
+    },
+    {
+        "content": "在 `server-configmap.yaml` 文件中，确实存在对 `appmanager.server.jwtSecretKey` 的引用，并且它使用了 Helm 的 `required` 函数来确保该值被设置。这表明配置文件已经正确地设置了引用，但看起来我之前提到的更新步骤可能没有完全解决这个问题，因为 `server-configmap.yaml` 中仍显示为临时值。\n\n为了确保一切按预期工作，我们需要直接在 `server-configmap.yaml` 中修正这个特定的引用，使其能够动态地从 `values.yaml` 中获取 `jwtSecretKey` 的值。我将进行以下操作：\n\n- 将 `server-configmap.yaml` 中硬编码的 `myTempJwtSecretKey1234567890` 替换为 `{{ .Values.jwtSecretKey }}` 以确保它能正确引用 `values.yaml` 文件中的实际密钥。\n\n现在，我将执行此更改。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_870cae8d512c4810975fe3",
+                "function": {
+                    "arguments": "{\"shell\": \"sed -i 's/appmanager.server.jwtSecretKey: myTempJwtSecretKey1234567890/appmanager.server.jwtSecretKey: {{ .Values.jwtSecretKey }}/g' sreworks/charts/appmanager/templates/server-configmap.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_870cae8d512c4810975fe3",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

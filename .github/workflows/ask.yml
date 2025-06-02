@@ -11,7 +11,9 @@ on:
 jobs:
   create_thought_branch:
     runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
-
+    outputs:
+      start_commit: ${{ steps.create_branch.outputs.start_commit }}
+      
     permissions:
       contents: write      # 需要读取并写入仓库内容
 
@@ -21,7 +23,8 @@ jobs:
         with:
           token: ${{ secrets.GIT_REPO_TOKEN }}
         
-      - name: Push thought branch
+      - id: create_branch
+        name: Push thought branch
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
@@ -33,3 +36,26 @@ jobs:
           git add chat
           git commit -m "thought question"
           git push origin ${{github.ref_name}}:ask-${{github.run_id}}
+          echo "Create branch: ask-${{github.run_id}}" >> $GITHUB_STEP_SUMMARY
+          echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+
+  branch_plan:
+    runs-on: ubuntu-latest
+    needs: create_thought_branch
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_REPO_TOKEN }}
+          fetch-depth: 0
+      - name: Read branch plan
+        run: |
+          echo "Received string: ${{ needs.create_thought_branch.outputs.start_commit }}"
+          git log -2
+
+        
+  

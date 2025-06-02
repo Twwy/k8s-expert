@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_f03aedab66674f618b622f",
         "content": "ret:0\nstdout:\n957cd165e2adb75f6001f5813a647167  sreworks-0.1.1.tgz\n\nstderr:\n\n"
+    },
+    {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_616f2e9b5b75425fbe505d",
+                "function": {
+                    "arguments": "{\"shell\": \"tar -tzf sreworks-0.1.1.tgz | grep 'appmanager\\\\.server\\\\.jwtSecretKey'\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_616f2e9b5b75425fbe505d",
+        "content": "ret:1\nstdout:\n\nstderr:\n\n"
     }
 ]

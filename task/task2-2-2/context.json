@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_e6503cac260a4b0681c743",
         "content": "ret:0\nstdout:\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/main/x86_64/APKINDEX.tar.gz\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/community/x86_64/APKINDEX.tar.gz\n(1/1) Installing openssl (3.5.0-r0)\nExecuting busybox-1.37.0-r18.trigger\nOK: 25 MiB in 44 packages\nsQ8n3jjfzH/SbxMZ/8RODGm1eQUhjt2sDSh7HJugzJo=\n\nstderr:\n\n"
+    },
+    {
+        "content": "成功生成了一个随机的JWT Secret Key：`sQ8n3jjfzH/SbxMZ/8RODGm1eQUhjt2sDSh7HJugzJo=`。接下来，我将使用这个值更新`sreworks/charts/appmanager/values.yaml`文件中的`appmanager.server.jwtSecretKey`字段。\n\n现在，我将执行命令来编辑或添加这个配置项到`values.yaml`中。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_edbef86bf5c24101ab4225",
+                "function": {
+                    "arguments": "{\"shell\": \"sed -i \\\"/^  server:/a\\\\  \\\\ jwtSecretKey: 'sQ8n3jjfzH\\/SbxMZ\\/8RODGm1eQUhjt2sDSh7HJugzJo='\\\" sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_edbef86bf5c24101ab4225",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

@@ -106,5 +106,25 @@
         "role": "tool",
         "tool_call_id": "call_fcd7f6e0d7444d228bf710",
         "content": "ret:2\nstdout:\n\nstderr:\n/bin/sh: syntax error: unterminated quoted string\n\n"
+    },
+    {
+        "content": "似乎在尝试使用 `sed` 和 `openssl` 命令时遇到了引号处理的问题。我将采取另一种方法来生成随机密钥并更新 `values.yaml` 文件，以避免命令中的引号问题。\n\n首先，我会生成一个随机的密钥，然后直接替换文件中的注释行。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_0666de2930584de9aac7cb",
+                "function": {
+                    "arguments": "{\"shell\": \"key=$(openssl rand -base64 32 | tr -d '\\\\n'); sed -i 's/#(jwtSecretKey: ).*/\\\\1'${key}'/g' sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_0666de2930584de9aac7cb",
+        "content": "ret:0\nstdout:\n\nstderr:\n/bin/sh: openssl: not found\n\n"
     }
 ]

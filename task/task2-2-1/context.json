@@ -86,5 +86,25 @@
         "role": "tool",
         "tool_call_id": "call_85f52ecd76e445948a54aa",
         "content": "ret:2\nstdout:\n\nstderr:\n/bin/sh: syntax error: unterminated quoted string\n\n"
+    },
+    {
+        "content": "在尝试更新 `values.yaml` 文件时遇到了一个语法错误。这可能是由于命令中的引号使用不当导致的。我将再次尝试，这次会更小心地处理命令中的引号问题。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_fcd7f6e0d7444d228bf710",
+                "function": {
+                    "arguments": "{\"shell\": \"sed -i 's/#(jwtSecretKey: ).*/\\\\1'$(openssl rand -base64 32 | tr -d '\\\\n')/g' sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_fcd7f6e0d7444d228bf710",
+        "content": "ret:2\nstdout:\n\nstderr:\n/bin/sh: syntax error: unterminated quoted string\n\n"
     }
 ]

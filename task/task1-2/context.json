@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_4f90932ebfaf436191071c",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "通过API直接获取sreworks-0.1.1.tgz版本链接的方法没有返回任何结果，这可能是因为GitHub API响应中并没有直接包含下载链接。通常情况下，这样的信息会嵌套在JSON格式的数据中。\n\n既然直接从API获取链接不太成功，我将尝试访问SREWorks项目的GitHub发布页面，手动查找该特定版本的文档或README文件。我们可以通过浏览网页来找到安装指南和配置 `appmanager.server.jwtSecretKey` 的说明。\n\n让我们直接访问SREWorks项目在GitHub上的发行页面，并寻找与sreworks-0.1.1.tgz相关的文档。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_750a48cc7eb548e6bfb800",
+                "function": {
+                    "arguments": "{\"shell\": \"wget -qO- https://github.com/alibaba/sreworks/releases/tag/v0.1.1 | grep -o 'https://github.com/.*sreworks-0.1.1\\\\.tgz' | head -n 1\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_750a48cc7eb548e6bfb800",
+        "content": "ret:0\nstdout:\n\nstderr:\nwget: server returned error: HTTP/1.1 404 Not Found\n\n"
     }
 ]

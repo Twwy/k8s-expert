@@ -86,5 +86,25 @@
         "role": "tool",
         "tool_call_id": "call_3ef3e41348a64e47b3e2f9",
         "content": "ret:2\nstdout:\n\nstderr:\n/usr/local/bin/helm: line 1: syntax error: unexpected \"(\"\n\n"
+    },
+    {
+        "content": "看来在下载 Helm 时出现了问题，因为直接从 URL 下载的不是 Helm 的二进制文件，而是一个 tar.gz 压缩包。我们需要先解压这个压缩包，然后才能使用 Helm。\n\n让我修正这个问题，正确地安装 Helm 并再次尝试安装 SREWorks。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_5075f61e9048481fb239a6",
+                "function": {
+                    "arguments": "{\"shell\": \"curl -fsSL -o /tmp/helm-v3.8.0-linux-amd64.tar.gz https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz && tar -C /tmp -zxvf /tmp/helm-v3.8.0-linux-amd64.tar.gz linux-amd64/helm && mv /tmp/linux-amd64/helm /usr/local/bin/helm && chmod +x /usr/local/bin/helm\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_5075f61e9048481fb239a6",
+        "content": "ret:0\nstdout:\nlinux-amd64/helm\n\nstderr:\n\n"
     }
 ]

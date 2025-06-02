@@ -106,5 +106,25 @@
         "role": "tool",
         "tool_call_id": "call_5075f61e9048481fb239a6",
         "content": "ret:0\nstdout:\nlinux-amd64/helm\n\nstderr:\n\n"
+    },
+    {
+        "content": "现在 Helm 已经正确安装了。接下来，我将使用正确的 Helm 二进制文件来尝试安装 SREWorks，并设置 `appmanager.server.jwtSecretKey` 为一个示例密钥值。请确保您在生产环境中使用的是一个强且安全的密钥。\n\n让我们执行安装命令。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_8fd3ab4e80434d26a81fcf",
+                "function": {
+                    "arguments": "{\"shell\": \"helm install sreworks-0.1.1 https://abm-mind-server.oss-cn-zhangjiakou.aliyuncs.com/sreworks-0.1.1.tgz --set appmanager.server.jwtSecretKey=yourStrongSecretKeyHere --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_8fd3ab4e80434d26a81fcf",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
     }
 ]

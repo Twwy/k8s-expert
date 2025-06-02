@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_251a483c57454effb8c26b",
         "content": "ret:0\nstdout:\n\nstderr:\nConnecting to abm-mind-server.oss-cn-zhangjiakou.aliyuncs.com (39.98.14.66:443)\nsaving to 'sreworks-0.1.1.tgz'\nsreworks-0.1.1.tgz    83% |**************************      |  551k  0:00:00 ETA\nsreworks-0.1.1.tgz   100% |********************************|  661k  0:00:00 ETA\n'sreworks-0.1.1.tgz' saved\n\n"
+    },
+    {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_f03aedab66674f618b622f",
+                "function": {
+                    "arguments": "{\"shell\": \"md5sum sreworks-0.1.1.tgz\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_f03aedab66674f618b622f",
+        "content": "ret:0\nstdout:\n957cd165e2adb75f6001f5813a647167  sreworks-0.1.1.tgz\n\nstderr:\n\n"
     }
 ]

@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_d29751e3efdc4ae5a67cc1",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_146ad3d70668446d942909",
+                "function": {
+                    "arguments": "{\"shell\": \"sed -i 's|#jwtSecretKey:.*|jwtSecretKey: myTempJwtSecretKey1234567890|' sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_146ad3d70668446d942909",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

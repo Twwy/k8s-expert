@@ -1,0 +1,1 @@
+安装 https://abm-mind-server.oss-cn-zhangjiakou.aliyuncs.com/sreworks-0.1.1.tgz 遇到报错  Error: execution error at (sreworks/charts/appmanager/templates/server-configmap.yaml:36:32): appmanager.server.jwtSecretKey is required  Use --debug flag to render out invalid YAML

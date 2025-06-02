@@ -1,12 +1,6 @@
 name: Executor
 
 on:
- workflow_dispatch:
-   inputs:
-     test:
-       description: 'test'
-       required: false
-       type: string
  push:
    branches:
    - 'executor/**/**'

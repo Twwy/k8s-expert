@@ -12,7 +12,7 @@ jobs:
   execute:
     runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
     container:
-      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-planner:latest
+      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-executor:latest
 
     permissions:
       contents: write      # 需要读取并写入仓库内容

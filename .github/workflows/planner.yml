@@ -3,7 +3,7 @@ name: Planner
 on:
  push:
    branches:
-   - 'ask-**'
+     - 'ask-**'
 
 jobs:
   plan:

@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_4f4a77a0358d4546bc29e2",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
+    },
+    {
+        "content": "看来在尝试执行 Helm 命令时仍然遇到了问题，即使 Helm 已经被下载并放置在 `/usr/local/bin/helm`。这可能是因为系统还没有更新 PATH 环境变量以包含 Helm 的位置。\n\n让我们确保环境变量已经更新，并且可以找到 Helm 命令。我将显式地指定 Helm 二进制文件的路径来运行安装命令。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_3ef3e41348a64e47b3e2f9",
+                "function": {
+                    "arguments": "{\"shell\": \"/usr/local/bin/helm install sreworks-0.1.1 https://abm-mind-server.oss-cn-zhangjiakou.aliyuncs.com/sreworks-0.1.1.tgz --set appmanager.server.jwtSecretKey=yourStrongSecretKeyHere --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_3ef3e41348a64e47b3e2f9",
+        "content": "ret:2\nstdout:\n\nstderr:\n/usr/local/bin/helm: line 1: syntax error: unexpected \"(\"\n\n"
     }
 ]

@@ -9,7 +9,7 @@ on:
        type: string
 
 jobs:
-  plan:
+  execute:
     runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
     container:
       image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-planner:latest

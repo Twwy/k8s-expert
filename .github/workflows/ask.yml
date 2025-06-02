@@ -54,8 +54,26 @@ jobs:
           fetch-depth: 0
       - name: Read branch plan
         run: |
-          echo "Received string: ${{ needs.create_thought_branch.outputs.start_commit }}"
-          git log -2
+
+          for i in $(seq 1 60)
+          do
+            echo "--- 第 $i 次 ---"
+            git pull
+          
+            # 获取 README.md 的第一行
+            first_line=$(head -n 1 README.md)
+          
+            # 检查第一行是否为 "```"
+            if echo "$first_line" | grep -Fq "```"; then
+              cat README.md >> $GITHUB_STEP_SUMMARY
+              exit 0 # 成功退出
+            else
+              echo "条件未满足。README.md 第一行内容为：$first_line"
+              sleep 5
+            fi
+
+          done        
+
 
         
   

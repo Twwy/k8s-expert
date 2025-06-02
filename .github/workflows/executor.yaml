@@ -3,7 +3,7 @@ name: Executor
 on:
  push:
    branches:
-   - 'executor/**/**'
+     - 'executor/**/**'
 
 jobs:
   execute:

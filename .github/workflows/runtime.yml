@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # 检出你的代码
+        with:
+          token: ${{ secrets.GIT_REPO_TOKEN }}
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3

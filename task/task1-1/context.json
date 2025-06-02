@@ -86,5 +86,25 @@
         "role": "tool",
         "tool_call_id": "call_0c1dbfe7313f43f5a41a4d",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: openssl: not found\n\n"
+    },
+    {
+        "content": "看起来当前环境中没有安装 `openssl`，这通常用于生成安全随机字符串。在Alpine Linux中，我们可以使用 `apk` 包管理器来安装它。首先我会安装 `openssl`，然后生成一个适合用作 `jwtSecretKey` 的随机字符串。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_c025324bee8d446bbcf240",
+                "function": {
+                    "arguments": "{\"shell\": \"apk add --no-cache openssl\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_c025324bee8d446bbcf240",
+        "content": "ret:0\nstdout:\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/main/x86_64/APKINDEX.tar.gz\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/community/x86_64/APKINDEX.tar.gz\n(1/1) Installing openssl (3.5.0-r0)\nExecuting busybox-1.37.0-r18.trigger\nOK: 25 MiB in 44 packages\n\nstderr:\n\n"
     }
 ]

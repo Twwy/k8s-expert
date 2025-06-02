@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_146ad3d70668446d942909",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_b504dfe88fc74f52806e56",
+                "function": {
+                    "arguments": "{\"shell\": \"echo '  appmanager.server.jwtSecretKey: myTempJwtSecretKey1234567890' >> sreworks/charts/appmanager/templates/server-configmap.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_b504dfe88fc74f52806e56",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_REPO_TOKEN }}
         
       - name: Push thought branch
         run: |

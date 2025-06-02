@@ -36,7 +36,7 @@ jobs:
           git add chat
           git commit -m "thought question"
           git push origin ${{github.ref_name}}:ask-${{github.run_id}}
-          echo "Create branch: ask-${{github.run_id}}" >> $GITHUB_STEP_SUMMARY
+          echo "Create branch: [ask-${{github.run_id}}](${{ github.server_url }}/${{ github.repository }}/tree/ask-${{github.run_id}})" >> $GITHUB_STEP_SUMMARY
           echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
 

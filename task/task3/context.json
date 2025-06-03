@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_ac7d67beaf6f4f00b75edf",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "### 步骤 5: 分析配置加载机制\n\n现在我们的项目已经设置好了，我们可以开始分析 Spring Boot 是如何加载配置的。\n\n#### 配置来源及其优先级\n\nSpring Boot 应用程序可以从多种来源读取属性值，包括但不限于：\n\n- `application.properties` 或 `application.yml` 文件\n- 环境变量\n- 命令行参数\n- JNDI 属性（在传统 Java EE 应用中使用）\n- 随机值（用于测试）\n\n这些配置来源按照一定的优先级顺序被加载。通常情况下，命令行参数具有最高的优先级，接着是环境变量，然后是 `application.properties` 或 `application.yml` 文件中的配置。\n\n#### @Value 注解与 @ConfigurationProperties 注解\n\n- **@Value**：用于注入单个属性值到字段或方法参数中。例如，可以将 `app.message` 注入到控制器中并返回给客户端。\n  \n  ```java\n  @RestController\n  public class MessageController {\n      @Value(\\\"${app.message}\\\")\n      private String message;\n\n      @GetMapping(\"/message\")\n      public String getMessage() {\n          return this.message;\n      }\n  }\n  ```\n\n- **@ConfigurationProperties**：允许将一组相关的属性绑定到一个 Java Bean 上。这对于复杂的配置结构非常有用。\n\n  ```java\n  @Component\n  @ConfigurationProperties(prefix = \"app\")\n  public class AppConfig {\n      private String message;\n\n      // getters and setters\n  }\n  ```\n\n### 步骤 6: 创建演示应用\n\n为了演示上述概念，我们将添加一个简单的 REST 控制器来展示如何通过 `@Value` 和 `@ConfigurationProperties` 使用配置。\n\n#### 添加控制器 (`MessageController.java`)\n\n```java\npackage com.example.demo;\n\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\npublic class MessageController {\n\n    @Value(\\\"${app.message}\\\")\n    private String message;\n\n    @GetMapping(\"/message\")\n    public String getMessage() {\n        return this.message;\n    }\n}\n```\n\n我将创建这个控制器类，并将其添加到项目中。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_98c496d139044d9c815a5c",
+                "function": {
+                    "arguments": "{\"shell\": \"cd spring-boot-tutorial; echo 'package com.example.demo;\\n\\nimport org.springframework.beans.factory.annotation.Value;\\nimport org.springframework.web.bind.annotation.GetMapping;\\nimport org.springframework.web.bind.annotation.RestController;\\n\\n@RestController\\npublic class MessageController {\\n\\n    @Value(\\\"\\\\\\\"${app.message}\\\\\\\"\\\")\\n    private String message;\\n\\n    @GetMapping(\\\"/message\\\")\\n    public String getMessage() {\\n        return this.message;\\n    }\\n}' > src/main/java/com/example/demo/MessageController.java\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_98c496d139044d9c815a5c",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

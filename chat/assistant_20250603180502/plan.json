@@ -32,7 +32,9 @@
     {
         "title": "探索Spring Boot配置加载机制",
         "description": "研究Spring Boot从application.properties或.yml文件读取并应用配置信息的方式。",
-        "id": "task3"
+        "id": "task3",
+        "result": "### 步骤 7: 运行应用程序\n\n现在，我们的 Spring Boot 应用程序已经准备好运行了。在实际的开发环境中，我们可以使用 Maven 或者 Gradle 来构建和运行项目。对于这个模拟环境，我将提供相应的命令来演示如何构建和启动应用。\n\n#### 构建和运行应用\n\n要构建并运行此 Spring Boot 应用程序，可以执行以下 Maven 命令：\n\n```bash\nmvn clean package\njava -jar target/demo-0.0.1-SNAPSHOT.jar\n```\n\n这将首先清理、编译项目，并打包成一个可执行的 JAR 文件，然后通过 Java 运行它。一旦应用程序启动，您就可以通过访问 `http://localhost:8080/message` 来查看从配置文件中读取的消息。\n\n由于这是一个虚拟环境，我们无法直接运行上述命令。但你可以复制这些步骤到你的本地开发环境中去尝试。\n\n### 总结\n\n通过这个教程，我们探索了 Spring Boot 如何加载配置信息，包括支持的不同配置来源以及它们之间的优先级关系。我们也讨论了 `@Value` 和 `@ConfigurationProperties` 注解的使用场景，并且创建了一个简单的 Spring Boot 应用来展示这些概念的应用。希望这篇教程对你有所帮助！如果你有任何问题或需要进一步的帮助，请随时告诉我。",
+        "finish": true
     },
     {
         "title": "总结Spring Boot启动的最佳实践",

@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/github-script@v6
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GIT_REPO_TOKEN }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -46,7 +46,7 @@ jobs:
           echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       - uses: actions/github-script@v6
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GIT_REPO_TOKEN }}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,

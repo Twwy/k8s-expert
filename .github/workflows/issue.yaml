@@ -45,7 +45,7 @@ jobs:
           echo "${{ steps.create_comment.outputs.result }}" > "chat/user_${timestamp}/issue_comment_id.txt"
           echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
           git add chat
-          git add user_session
+          git add latest_user_session
           git commit -m "thought question"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY

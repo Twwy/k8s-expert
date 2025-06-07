@@ -23,7 +23,7 @@ jobs:
         with:
           github-token: ${{ secrets.GIT_REPO_TOKEN }}
           script: |
-            const comment = github.rest.issues.createComment({
+            const comment = await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -41,10 +41,11 @@ jobs:
           rm chat
           mkdir chat
           mkdir "chat/user_${timestamp}"
-          ln -sfn "chat/user_${timestamp}" user_session
+          ln -sn "chat/user_${timestamp}" user_session
           echo "${{ steps.create_comment.outputs.result }}" > "chat/user_${timestamp}/issue_comment_id.txt"
           echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
           git add chat
+          git add user_session
           git commit -m "thought question"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY

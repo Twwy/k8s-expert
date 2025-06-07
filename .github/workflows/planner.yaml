@@ -58,3 +58,4 @@ jobs:
           github-token: ${{ secrets.GIT_REPO_TOKEN }}
           script: |
             console.log(require('fs').readdirSync('.'));
+      

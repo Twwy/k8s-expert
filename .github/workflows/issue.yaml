@@ -14,7 +14,7 @@ jobs:
       contents: write      # 需要读取并写入仓库内容
 
     steps:
-        - uses: actions/github-script@v6
+      - uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |

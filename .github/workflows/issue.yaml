@@ -29,6 +29,7 @@ jobs:
               repo: context.repo.repo,
               body: '已创建任务分支 [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})'
             })
+            console.log(comment);
             return comment.id
 
       - id: create_branch

@@ -34,3 +34,13 @@ jobs:
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/ask-${{github.run_id}}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY
           echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '已创建任务分支 [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/ask-${{github.run_id}}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})'
+            })

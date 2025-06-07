@@ -41,7 +41,7 @@ jobs:
           rm chat
           mkdir chat
           mkdir "chat/user_${timestamp}"
-          ln -sn "chat/user_${timestamp}" user_session
+          ln -sn "chat/user_${timestamp}" latest_user_session
           echo "${{ steps.create_comment.outputs.result }}" > "chat/user_${timestamp}/issue_comment_id.txt"
           echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
           git add chat

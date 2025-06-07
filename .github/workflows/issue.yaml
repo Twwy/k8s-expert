@@ -14,16 +14,6 @@ jobs:
       contents: write      # 需要读取并写入仓库内容
 
     steps:
-      - uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GIT_REPO_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '[任务创建中](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{github.run_id}})'
-            })
       - name: Checkout repository
         uses: actions/checkout@v4
         with:

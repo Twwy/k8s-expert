@@ -4,6 +4,7 @@ on:
  push:
    branches:
      - 'ask-**'
+     - 'issue-**'
 
 jobs:
   plan:

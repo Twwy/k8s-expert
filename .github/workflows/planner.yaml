@@ -52,3 +52,9 @@ jobs:
 
           echo "TARGET_BRANCH: ${TARGET_BRANCH}"          
           git push origin ${EXEC_BRANCH}:${TARGET_BRANCH}
+      - uses: actions/github-script@v6
+        id: create_comment
+        with:
+          github-token: ${{ secrets.GIT_REPO_TOKEN }}
+          script: |
+            console.log(require('fs').readdirSync('.'));

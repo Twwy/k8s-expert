@@ -18,7 +18,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GIT_REPO_TOKEN }}
-        
+      - uses: actions/github-script@v6
+        id: create_comment
+        with:
+          github-token: ${{ secrets.GIT_REPO_TOKEN }}
+          script: |
+            const { data: comment } = github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '已创建任务分支 [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})'
+            })
+            return comment.id
+
       - id: create_branch
         name: Push thought branch
         run: |
@@ -28,19 +40,11 @@ jobs:
           rm chat
           mkdir chat
           mkdir "chat/user_${timestamp}"
+          ln -sfn "chat/user_${timestamp}" user_session
+          echo "${{ steps.create_comment.outputs.result }}" > "chat/user_${timestamp}/issue_comment_id.txt"
           echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
           git add chat
           git commit -m "thought question"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY
           echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-      - uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GIT_REPO_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '已创建任务分支 [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})'
-            })

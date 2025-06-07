@@ -28,7 +28,7 @@ jobs:
           rm chat
           mkdir chat
           mkdir "chat/user_${timestamp}"
-          echo "${{github.event.inputs.question}}" > "chat/user_${timestamp}/message.md"
+          echo "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
           git add chat
           git commit -m "thought question"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}

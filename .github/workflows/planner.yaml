@@ -66,13 +66,29 @@ jobs:
                return;
              }
 
+             // 1. 从分支引用 (ref) 中提取 Issue 编号
+             // context.ref 的格式通常是 'refs/heads/issue-123'
+             const branchRef = context.ref;
+             const match = branchRef.match(/^refs\/heads\/issue-(\d+)$/);
+            
+             // 2. 检查分支名是否匹配 'issue-**' 格式
+             if (!match) {
+               const branchName = branchRef.split('/').pop();
+               console.log(`当前分支 '${branchName}' 不符合 'issue-**' 格式，脚本将跳过执行。`);
+               return; // 退出脚本
+             }
+
+             // 3. 如果匹配成功，则提取 issueNumber
+             const issueNumber = parseInt(match[1], 10);
+             console.log(`从分支名中成功提取 Issue 编号: #${issueNumber}`);
+
              for (const entry of fs.readdirSync(dirPath)) {
                const fullPath = path.join(dirPath, entry);
                const stat = fs.statSync(fullPath);
                if (stat.isFile()) {
                  const fileContent = fs.readFileSync(fullPath, 'utf8');
                  await github.rest.issues.createComment({
-                   issue_number: context.issue.number,
+                   issue_number: issueNumber,
                    owner: context.repo.owner,
                    repo: context.repo.repo,
                    body: fileContent

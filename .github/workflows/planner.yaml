@@ -58,12 +58,38 @@ jobs:
           github-token: ${{ secrets.GIT_REPO_TOKEN }}
           script: |
              const fs = require('fs');
-             const body = fs.readFileSync('event/plan.md', 'utf8');
-             const comment = await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body,
-             });
-             console.log(comment);
-      
+             const path = require('path');
+             const dirPath = 'event';
+
+             if (!fs.existsSync(dirPath)) {
+               console.log(`Directory not found: ${dirPath}. No comments will be created.`);
+               return;
+             }
+
+             const entries = fs.readdirSync(dirPath);
+
+             if (entries.length === 0) {
+               console.log(`Directory is empty: ${dirPath}. No comments will be created.`);
+               return;
+             }
+
+             for (const entry of entries) {
+               const fullPath = path.join(dirPath, entry);
+               
+               try {
+                 const stat = fs.statSync(fullPath);
+                 if (stat.isFile()) {
+                   const fileContent = fs.readFileSync(fullPath, 'utf8');
+                   await github.rest.issues.createComment({
+                     issue_number: context.issue.number,
+                     owner: context.repo.owner,
+                     repo: context.repo.repo,
+                     body: fileContent
+                   });
+                   console.log(`Successfully created a comment for the file: ${entry}`);
+                 }
+               } catch (error) {
+                 core.error(`Failed to process file ${fullPath}: ${error.message}`);
+               }
+             }
+             

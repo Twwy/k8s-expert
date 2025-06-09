@@ -27,11 +27,9 @@ jobs:
           rm chat
           mkdir chat
           mkdir "chat/user_${timestamp}"
-          ln -sn "chat/user_${timestamp}" latest_user_session
           echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
           git add chat
-          git add latest_user_session
-          git commit -m "thought question"
+          git commit -m "init task"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY
           echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT

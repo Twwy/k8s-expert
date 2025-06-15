@@ -9,5 +9,6 @@ RUN apt-get update && \
 
 RUN pip install agitops
 
-RUN python -m playwright install-deps
-RUN python -m playwright install
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN python -m playwright install --with-deps
+

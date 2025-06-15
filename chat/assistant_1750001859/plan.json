@@ -3,7 +3,9 @@
         "title": "查找并访问Sreworks团队官方网站",
         "description": "使用浏览器在网络上查找Sreworks团队的官方网站链接，并直接访问该网站进入主页。",
         "executor": "browser",
-        "id": "task1"
+        "id": "task1",
+        "result": "尝试访问Sreworks官方网站时遇到了问题，网站证书无效。请检查网站证书或者尝试稍后再试。",
+        "finish": true
     },
     {
         "title": "寻找并确认联系信息",

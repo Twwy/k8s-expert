@@ -1,0 +1,102 @@
+name: Explorer
+
+on:
+ push:
+   branches:
+     - 'explorer/**/**'
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
+    container:
+      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-explorer:latest
+
+    permissions:
+      contents: write      # 需要读取并写入仓库内容
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_REPO_TOKEN }}
+          fetch-depth: 0
+        
+      - name: Push thought branch
+        run: |
+
+
+          set -e
+
+          EXEC_BRANCH="${{github.ref_name}}"
+          TASK_NAME=$(echo "$EXEC_BRANCH" | cut -d'/' -f2)
+          SRC_BRANCH="${EXEC_BRANCH##*/}"
+          ROOT_PATH=$(pwd)
+
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "{{ github.actor }}"
+          git config --global --add safe.directory ${ROOT_PATH}
+          
+          cat <<DELIMITER > /etc/gitops.yaml
+          llm_model: qwen-max
+          llm_api_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+          llm_api_key: ${{secrets.DASHSCOPE_API_KEY}}
+          work_root_path: $(pwd)
+          task_path: $(pwd)/task/${TASK_NAME}
+          git_user_email: "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git_user_name: "${{ github.actor }}"
+          task_name: ${TASK_NAME}
+          DELIMITER
+          
+          python3 -m agitops.agent.explorer
+          
+          git push origin ${EXEC_BRANCH}:${SRC_BRANCH}
+          git push origin --delete ${EXEC_BRANCH}
+
+
+      - uses: actions/github-script@v6
+        id: create_comment
+        with:
+          github-token: ${{ secrets.GIT_REPO_TOKEN }}
+          script: |
+             const fs = require('fs');
+             const path = require('path');
+             const dirPath = 'event';
+
+             if (!fs.existsSync(dirPath)) {
+               console.log(`Directory not found: ${dirPath}. No comments will be created.`);
+               return;
+             }
+             
+             // 1. From the branch ref (e.g., 'refs/heads/executor/task1/issue-123'), extract the Issue number.
+             const branchRef = context.ref;
+             // The updated regex now finds 'issue- followed by digits' at the end of the string.
+             const match = branchRef.match(/issue-(\d+)$/); 
+   
+             // 2. Check if the branch name matches the '.../issue-**' format.
+             if (!match) {
+               const branchName = branchRef.split('/').pop();
+               console.log(`The current branch '${branchName}' does not match the '.../issue-**' format. The script will be skipped.`);
+               return;
+             }
+   
+             // 3. If it matches, extract the issueNumber.
+             const issueNumber = parseInt(match[1], 10);
+             console.log(`Successfully extracted Issue number from branch name: #${issueNumber}`);
+
+             for (const entry of fs.readdirSync(dirPath)) {
+               const fullPath = path.join(dirPath, entry);
+               const stat = fs.statSync(fullPath);
+               if (stat.isFile()) {
+                 const fileContent = fs.readFileSync(fullPath, 'utf8');
+                 await github.rest.issues.createComment({
+                   issue_number: issueNumber,
+                   owner: context.repo.owner,
+                   repo: context.repo.repo,
+                   body: fileContent
+                 });
+                 console.log(`Successfully created a comment for the file: ${entry}`);
+               }
+             }
+
+
+

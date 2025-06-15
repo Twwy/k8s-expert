@@ -6,10 +6,11 @@ on:
      agent:
        description: '智能体'
        required: false
-       default: 'executor'
+       default: 'explorer'
        type: choice
        options:
-       - executor
+       - browser
+       - explorer
        - planner
 
 jobs:

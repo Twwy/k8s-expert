@@ -1,15 +1,15 @@
-name: Executor
+name: Browser
 
 on:
  push:
    branches:
-     - 'executor/**/**'
+     - 'browser/**/**'
 
 jobs:
   execute:
     runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
     container:
-      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-executor:latest
+      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-browser:latest
 
     permissions:
       contents: write      # 需要读取并写入仓库内容
@@ -47,7 +47,7 @@ jobs:
           task_name: ${TASK_NAME}
           DELIMITER
           
-          python3 -m agitops.agent.explorer
+          python3 -m agitops.agent.browser
           
           git push origin ${EXEC_BRANCH}:${SRC_BRANCH}
           git push origin --delete ${EXEC_BRANCH}

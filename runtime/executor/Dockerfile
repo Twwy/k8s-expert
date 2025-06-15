@@ -9,5 +9,5 @@ RUN apt-get update && \
 
 RUN pip install agitops
 
-RUN python -m playwright install-deps && \
-    python -m playwright install
+RUN python -m playwright install-deps
+RUN python -m playwright install

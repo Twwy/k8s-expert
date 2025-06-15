@@ -1,0 +1,35 @@
+{
+    "final_result": "尝试访问Sreworks官方网站时遇到了问题，网站证书无效。请检查网站证书或者尝试稍后再试。",
+    "history": [
+        {
+            "url": "about:blank",
+            "result": [
+                {
+                    "content": "🔍  Searched for \"Sreworks 团队 官方网站\" in Google",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "url": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3DSreworks%2520%25E5%259B%25A2%25E9%2598%259F%2520%25E5%25AE%2598%25E6%2596%25B9%25E7%25BD%2591%25E7%25AB%2599%26udm%3D14%26sei%3DC-lOaPP3IMbn2roPhbOJoAQ&q=EgQUZsfZGIvSu8IGIjDIU4SJiOwZWENpF1zlDuxug6jjmhcHXs9LIQ0KPN4AVpi73iS5IEah7b3YUbIHMjkyAVJaAUM",
+            "result": []
+        },
+        {
+            "url": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3DSreworks%2520%25E5%259B%25A2%25E9%2598%259F%2520%25E5%25AE%2598%25E6%2596%25B9%25E7%25BD%2591%25E7%25AB%2599%26udm%3D14%26sei%3DC-lOaPP3IMbn2roPhbOJoAQ&q=EgQUZsfZGIvSu8IGIjDIU4SJiOwZWENpF1zlDuxug6jjmhcHXs9LIQ0KPN4AVpi73iS5IEah7b3YUbIHMjkyAVJaAUM",
+            "result": []
+        },
+        {
+            "url": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3DSreworks%2520%25E5%259B%25A2%25E9%2598%259F%2520%25E5%25AE%2598%25E6%2596%25B9%25E7%25BD%2591%25E7%25AB%2599%26udm%3D14%26sei%3DC-lOaPP3IMbn2roPhbOJoAQ&q=EgQUZsfZGIvSu8IGIjDIU4SJiOwZWENpF1zlDuxug6jjmhcHXs9LIQ0KPN4AVpi73iS5IEah7b3YUbIHMjkyAVJaAUM",
+            "result": []
+        },
+        {
+            "url": "chrome-error://chromewebdata/",
+            "result": [
+                {
+                    "content": "尝试访问Sreworks官方网站时遇到了问题，网站证书无效。请检查网站证书或者尝试稍后再试。",
+                    "error": null
+                }
+            ]
+        }
+    ]
+}

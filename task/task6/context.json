@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_0e46c6a81bcd4b0c880296",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
+    },
+    {
+        "content": "安装过程中遇到了错误，具体信息如下：\n\n```\n/bin/sh: helm: not found\n```\n\n这表明系统中没有找到 `helm` 命令。考虑到之前提供的文件结构中确实存在 `~/.bin/helm` 文件，说明 Helm 工具可能已经下载但未被添加到系统的 PATH 环境变量中。\n\n为了能够使用 Helm 进行安装，我们需要将 Helm 的可执行路径添加到 PATH 环境变量中。接下来我将执行相应的命令来更新环境变量，并再次尝试安装。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_6a19d69c8a9740718b2ed9",
+                "function": {
+                    "arguments": "{\"shell\": \"export PATH=$PATH:$HOME/.bin && helm install sreworks https://abm-mind-server.oss-cn-zhangjiakou.aliyuncs.com/sreworks-0.1.1.tgz --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_6a19d69c8a9740718b2ed9",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
     }
 ]

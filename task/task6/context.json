@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_a5e58fa790d9402794f7c4",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: sudo: not found\n\n"
+    },
+    {
+        "content": "在当前环境中，`sudo` 命令不可用，这通常意味着我们可能处于一个受限的容器环境或者没有足够的权限来执行需要超级用户权限的操作。不过，既然 `helm` 未被找到，我们可以尝试直接安装它而不需要 `sudo`。\n\n我将尝试使用另一种方式来安装 `helm`，这种方式不需要超级用户权限。让我们开始吧。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_fe787b92d1e440489bada4",
+                "function": {
+                    "arguments": "{\"shell\": \"curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3; chmod 700 get_helm.sh; ./get_helm.sh\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_fe787b92d1e440489bada4",
+        "content": "ret:1\nstdout:\nIn order to verify checksum, openssl must first be installed.\nPlease install openssl or set VERIFY_CHECKSUM=false in your environment.\nFailed to install helm\n\tFor support, go to https://github.com/helm/helm.\n\nstderr:\n/bin/sh: curl: not found\n\n"
     }
 ]

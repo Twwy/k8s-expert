@@ -4,7 +4,9 @@
         "title": "检查安装包完整性",
         "description": "确认从指定URL下载的sreworks-0.1.1.tgz文件是否完整无误。",
         "executor": "browser",
-        "id": "task1"
+        "id": "task1",
+        "result": "已从指定URL下载sreworks-0.1.1.tgz文件，并通过md5sum完成了文件完整性的验证。",
+        "finish": true
     },
     {
         "title": "解压安装包",

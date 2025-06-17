@@ -1,0 +1,154 @@
+现在，`values.yaml` 文件已经更新，并且包含了一个新的 `appmanager.server.jwtSecretKey` 条目。以下是更新后的文件内容：
+
+```yaml
+global:
+  storageClass: "sreworks-local"
+  minio:
+    accessKey: 'XmizyTRKhgYTrVkK'
+    secretKey: 'Df229gtwZ4bssMzK23VJXq9vrGqpxdHA'
+  images:
+    registry: sreworks-registry.cn-beijing.cr.aliyuncs.com/hub
+    tag: v1.5
+    imagePullPolicy: Always 
+  accessMode: ingress
+  artifacts:
+    mavenImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/maven:3.8.3-adoptopenjdk-11 
+    openjdk8Image: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/openjdk8:alpine-jre
+    openjdk11Image: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/openjdk:11.0.10-jre
+    openjdk11AlpineImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/openjdk11:alpine-jre
+    apkRepoDomain: mirrors.tuna.tsinghua.edu.cn
+    mavenSettingsXml: https://sreworks.oss-cn-beijing.aliyuncs.com/resource/settings.xml  
+    alpineImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/alpine:latest
+    nodeImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/node:14.20.0-alpine3.15
+    nodeImage2: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/node:16.17-alpine
+    npmRegistryUrl: https://registry.npmmirror.com
+    migrateImage: sw-migrate 
+    postrunImage: sw-postrun
+    pythonPip: http://mirrors.aliyun.com/pypi/simple
+    minioClientUrl: https://sreworks.oss-cn-beijing.aliyuncs.com/bin/mc-linux-amd64
+    python3Image: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/python:3.9.12-alpine
+    bentomlImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/bentoml-model-server:0.13.1-py37
+    logstashImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/logstash:7.10.2 
+    grafanaImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/grafana:7.5.3
+    kibanaImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/kibana:7.10.2 
+    elasticsearchImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/elasticsearch:7.10.2-with-plugins
+    skywalkingOapImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/skywalking-oap-server-utc-8:9.2.0
+    skywalkingUiImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/skywalking-ui:9.2.0
+    busyboxImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/busybox:1.30
+    vvpRegistry: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror
+    vvpAppmanagerImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/vvp-appmanager:2.6.1
+    vvpGatewayImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/vvp-gateway:2.6.1
+    vvpUiImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/vvp-ui:2.6.1
+    metricbeatImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/metricbeat:7.10.2 
+    filebeatImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/filebeat:7.10.2
+    mysqlImage: sreworks-registry.cn-beijing.cr.aliyuncs.com/mirror/mysql:8.0.22-debian-10-r44
+
+platformName: SREWorks
+platformLogo: /static/icons/sreworks.png
+
+installMode: default
+
+localPathProvisioner: true
+progressCheck: true
+debug: false
+adminInitPassword: "12345678"
+
+images: {}
+
+build:
+  isHome: false
+  importFrontend: true
+  enable: false
+  images: {}
+
+core: 
+  init: true
+  stageId: prod
+  appId: flycore
+
+saas:
+  init: true
+  stageId: prod
+  onlyBase: false
+  list:
+  - demoapp
+  - cluster
+  - app
+  - team
+  - dataops
+  - system
+  - job
+  - search
+  - healing
+  - aiops
+  - health
+  - ocenter
+  - help
+  - upload
+  baseList:
+  - cluster
+  - app
+  - team
+  - system
+  - help
+  - upload
+  - demoapp 
+  dataops:
+    dbHost: 'prod-dataops-mysql.sreworks-dataops'
+    dbPassword: cb56b5is5e21_c359b42223
+    dbUser: root
+    dbPort: 3306
+    esHost: 'prod-dataops-elasticsearch-master.sreworks-dataops'
+    esPort: 9200
+    esUser: "elastic"
+    esPassword: "sreworkses123."
+    prometheusHost: "prod-dataops-prometheus-server.sreworks-dataops"
+    prometheusPort: "80"
+    filebeatEnable: true
+    metricbeatEnable: true
+
+  grafana:
+    password: "sreworks123456"
+
+swcli:
+  username: superuser
+  password: yJfIYmjAiCL0ondV3kY7e5x6kVTpvC3h
+  clientId: superclient
+  clientSecret: stLCjCPKbWmki65DsAj2jPoeBLPimpJa
+
+source:
+  branch: v1.5
+  repo: https://atomgit.com/sreworks/SREWorks.git
+
+appmanagerbase:
+  enabled: true
+  redis:
+    password: 'siJEULmQYQ' 
+ 
+appmanager:
+  enabled: true
+
+  gateway:
+    account_super_client_id: common
+    account_super_client_secret: common-9efab2399c7c560b34de477b9aa0a465 
+    account_super_id: admin
+    account_super_secret_key: test-super-secret-key 
+
+  server:
+    sreworksEnvs: true
+    jvmXMX: "512m"
+    docker:
+      enableKaniko: true
+      account: sreworks
+      password: sreworksDocker123q
+      registry: registry.cn-zhangjiakou.aliyuncs.com
+      namespace: builds
+
+appmanager:
+  server:
+    jwtSecretKey: gt7BTdZLQFfC70aT1DR46uqfaB3nRiJ6
+```
+
+现在，`jwtSecretKey` 已经被设置为一个随机字符串 `gt7BTdZLQFfC70aT1DR46uqfaB3nRiJ6`。
+
+接下来，您可以使用更新后的 `values.yaml` 文件来重新尝试安装 Helm chart。如果您需要进一步的帮助或有其他问题，请告诉我！

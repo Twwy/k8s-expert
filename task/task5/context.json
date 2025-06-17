@@ -166,5 +166,25 @@
         "role": "tool",
         "tool_call_id": "call_2b2fed561f8449fc8d88c1",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: /root/bin/helm: not found\n\n"
+    },
+    {
+        "content": "由于 `/root/bin/helm` 仍然找不到，看起来 Helm 可能并没有被正确放置在该路径下。考虑到我们之前使用了 `~/bin/helm` 来下载和解压 Helm，并且没有更改这个路径，我将直接使用相对路径 `./bin/helm` 来尝试执行 Helm 命令。\n\n让我们再次尝试打包并安装 Helm 图表。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_2daff5ebad18459fbfe5c9",
+                "function": {
+                    "arguments": "{\"shell\": \"cd /__w/k8s-expert/k8s-expert/workspace/temp/sreworks && ../../bin/helm package . && mv sreworks-0.1.1.tgz /__w/k8s-expert/k8s-expert/workspace/ && cd /__w/k8s-expert/k8s-expert/workspace/ && ../../bin/helm install sreworks-test ./sreworks-0.1.1.tgz --set appmanager.server.jwtSecretKey=yourSecureKeyHere --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_2daff5ebad18459fbfe5c9",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: ../../bin/helm: not found\n\n"
     }
 ]

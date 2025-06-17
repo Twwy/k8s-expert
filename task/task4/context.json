@@ -106,5 +106,9 @@
         "role": "tool",
         "tool_call_id": "call_4a6bd114b53842dbb5a22e",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "`values.yaml` 文件已经更新，现在包含了 `jwtSecretKey` 的有效值。这应该解决了安装过程中遇到的错误。\n\n如果你需要进一步的帮助，比如如何继续安装过程或者验证更改是否生效，请告诉我下一步你打算做什么。如果一切就绪，你可以尝试重新运行 Helm 安装命令来部署应用。",
+        "role": "assistant"
     }
 ]

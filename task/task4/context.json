@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_6258040ddbbd4336a9778a",
         "content": "ret:0\nstdout:\n\nstderr:\n/bin/sh: openssl: not found\n\n"
+    },
+    {
+        "content": "看起来系统中没有安装 `openssl`，因此我将尝试使用其他方法来生成一个安全的随机密钥。让我们使用 Python 来生成这个密钥，并更新 `values.yaml` 文件。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_c89f2a7f58824a9a994654",
+                "function": {
+                    "arguments": "{\"shell\": \"python3 -c 'import secrets; print(secrets.token_urlsafe(32))' | tee jwtSecretKey.txt && cat sreworks-decompressed/sreworks/charts/appmanager/values.yaml | sed 's/#\\\\(jwtSecretKey:.*\\\\)/\\\\1/' | sed '/jwtSecretKey:/ s|= .*=|=$(cat jwtSecretKey.txt)|' > updated-values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_c89f2a7f58824a9a994654",
+        "content": "ret:0\nstdout:\n\nstderr:\n/bin/sh: python3: not found\n\n"
     }
 ]

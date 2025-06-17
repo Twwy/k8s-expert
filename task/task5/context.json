@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_3b7bfb5e53504028bedbe4",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: curl: not found\n\n"
+    },
+    {
+        "content": "看来 `curl` 也没有安装在这个环境中。为了继续，我将首先尝试安装 `curl`，然后使用它来下载并安装 Helm。\n\n让我们先安装 `curl`。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_d36d28e5cb824af19ec59f",
+                "function": {
+                    "arguments": "{\"shell\": \"apt-get update && apt-get install -y curl\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_d36d28e5cb824af19ec59f",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: apt-get: not found\n\n"
     }
 ]

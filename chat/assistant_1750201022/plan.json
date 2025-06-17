@@ -19,6 +19,8 @@
         "title": "阅读今日发布的新闻",
         "description": "查看今天发布的所有新闻内容，特别是头条新闻",
         "executor": "browser",
-        "id": "task3"
+        "id": "task3",
+        "result": "Today's news from Alibaba Cloud: \n\n- **Title**: Alibaba Cloud Joins Forces with PayNet to Power Malaysia's First Fintech-Focused Hub\n- **Date**: May 21, 2025\n- **Summary**: Alibaba Cloud is proud to announce its partnership with Payments Network Malaysia Sdn Bhd (PayNet) as a Cloud Partner for its newly launched PayNet Fintech Hub – Malaysia's first dedicated fintech-focused community and accelerator.\n\nThis is the latest news available on the press room page. If you need more information or updates, please let me know.",
+        "finish": true
     }
 ]

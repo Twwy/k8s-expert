@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_9024137e9bef4c129702ba",
         "content": "ret:0\nstdout:\n\n\nstderr:\n/bin/sh: openssl: not found\n/bin/sh: openssl: not found\n\n"
+    },
+    {
+        "content": "看起来系统中没有安装 `openssl`，这导致我们无法直接使用它来生成随机密钥。不过不用担心，我们可以尝试使用其他方法来生成一个随机字符串作为 JWT 密钥。\n\n让我们使用 Python 来生成这个随机字符串，并将其添加到 `values.yaml` 文件中。如果当前环境中没有 Python，我们将需要考虑其他方案。现在我将先尝试使用 Python 生成密钥。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_bedcb89b8ec545ea8e5f51",
+                "function": {
+                    "arguments": "{\"shell\": \"python3 -c 'import secrets; print(secrets.token_urlsafe(32))' && echo '' && sed -i '/^appmanager:/a\\\\  server:\\\\n    jwtSecretKey: '\\\"`python3 -c 'import secrets; print(secrets.token_urlsafe(32))'`\\\" sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_bedcb89b8ec545ea8e5f51",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: python3: not found\n\n"
     }
 ]

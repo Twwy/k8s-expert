@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_6a19d69c8a9740718b2ed9",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
+    },
+    {
+        "content": "仍然遇到了同样的错误，`/bin/sh: helm: not found`。这表明即使尝试更新了 PATH 环境变量，系统还是未能找到 `helm` 命令。可能的原因包括环境变量未正确加载或 Helm 可执行文件路径不正确。\n\n考虑到当前情况，我将直接使用完整路径来调用 Helm 工具，并重新尝试安装过程。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_7e1bafba23a84807aa3e12",
+                "function": {
+                    "arguments": "{\"shell\": \"~/bin/helm install sreworks https://abm-mind-server.oss-cn-zhangjiakou.aliyuncs.com/sreworks-0.1.1.tgz --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_7e1bafba23a84807aa3e12",
+        "content": "ret:1\nstdout:\n\nstderr:\ninstall.go:178: [debug] Original chart version: \"\"\ninstall.go:195: [debug] CHART PATH: /__w/k8s-expert/k8s-expert/workspace/.cache/helm/repository/sreworks-0.1.1.tgz\n\nError: INSTALLATION FAILED: Kubernetes cluster unreachable: Get \"http://localhost:8080/version\": dial tcp [::1]:8080: connect: connection refused\nhelm.go:84: [debug] Get \"http://localhost:8080/version\": dial tcp [::1]:8080: connect: connection refused\nKubernetes cluster unreachable\nhelm.sh/helm/v3/pkg/kube.(*Client).IsReachable\n\thelm.sh/helm/v3/pkg/kube/client.go:121\nhelm.sh/helm/v3/pkg/action.(*Install).RunWithContext\n\thelm.sh/helm/v3/pkg/action/install.go:192\nmain.runInstall\n\thelm.sh/helm/v3/cmd/helm/install.go:264\nmain.newInstallCmd.func2\n\thelm.sh/helm/v3/cmd/helm/install.go:125\ngithub.com/spf13/cobra.(*Command).execute\n\tgithub.com/spf13/cobra@v1.4.0/command.go:856\ngithub.com/spf13/cobra.(*Command).ExecuteC\n\tgithub.com/spf13/cobra@v1.4.0/command.go:974\ngithub.com/spf13/cobra.(*Command).Execute\n\tgithub.com/spf13/cobra@v1.4.0/command.go:902\nmain.main\n\thelm.sh/helm/v3/cmd/helm/helm.go:83\nruntime.main\n\truntime/proc.go:255\nruntime.goexit\n\truntime/asm_amd64.s:1581\nINSTALLATION FAILED\nmain.newInstallCmd.func2\n\thelm.sh/helm/v3/cmd/helm/install.go:127\ngithub.com/spf13/cobra.(*Command).execute\n\tgithub.com/spf13/cobra@v1.4.0/command.go:856\ngithub.com/spf13/cobra.(*Command).ExecuteC\n\tgithub.com/spf13/cobra@v1.4.0/command.go:974\ngithub.com/spf13/cobra.(*Command).Execute\n\tgithub.com/spf13/cobra@v1.4.0/command.go:902\nmain.main\n\thelm.sh/helm/v3/cmd/helm/helm.go:83\nruntime.main\n\truntime/proc.go:255\nruntime.goexit\n\truntime/asm_amd64.s:1581\n\n"
     }
 ]

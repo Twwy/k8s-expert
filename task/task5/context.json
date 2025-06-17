@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_c5f77e2953e1403fb73fb6",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "已经在 `sreworks/charts/appmanager/values.yaml` 文件中添加了 `appmanager.server.jwtSecretKey` 的值。接下来，我们需要重新打包修改后的 Helm Chart 为 `.tgz` 格式。\n\n让我们进行打包。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_05e45e351640452ca83f80",
+                "function": {
+                    "arguments": "{\"shell\": \"tar -czf sreworks-0.1.1-fixed.tgz -C sreworks .\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_05e45e351640452ca83f80",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

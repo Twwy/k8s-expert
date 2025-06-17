@@ -45,6 +45,8 @@ jobs:
           git_user_email: "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git_user_name: "${{ github.actor }}"
           task_name: ${TASK_NAME}
+          google_api_key: ${{secrets.GOOGLE_API_KEY}}
+          google_api_cx: ${{secrets.GOOGLE_API_CX}}
           DELIMITER
           
           python3 -m agitops.agent.browser

@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_2b17ddc068d84fbdbae485",
         "content": "ret:127\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "确认了 `helm` 命令未被找到，这意味着 Helm 可能没有安装在这个环境中。为了继续解决这个问题，我们需要先安装 Helm。\n\n在 Debian 及其衍生版（如 Ubuntu）上，可以使用以下步骤来安装 Helm：\n\n1. 下载 Helm 安装脚本。\n2. 执行该脚本来安装 Helm。\n\n让我们开始安装 Helm。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_682ee2b6c9fd480098bb8e",
+                "function": {
+                    "arguments": "{\"shell\": \"curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3; chmod 700 get_helm.sh; ./get_helm.sh\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_682ee2b6c9fd480098bb8e",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: curl: not found\nchmod: get_helm.sh: No such file or directory\n/bin/sh: ./get_helm.sh: not found\n\n"
     }
 ]

@@ -1,0 +1,11 @@
+apiVersion: v1
+description: SREWorks - AppManager
+home: https://github.com/alibaba/sreworks
+icon: https://sreworks.oss-cn-beijing.aliyuncs.com/logo/logo.png
+keywords:
+- bigdata
+maintainers:
+- email: yaoxing.gyx@alibaba-inc.com
+  name: Yaoxing Guo
+name: appmanager
+version: 1.0.0

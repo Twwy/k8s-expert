@@ -166,5 +166,25 @@
         "role": "tool",
         "tool_call_id": "call_50bd1d6b1579475e89b09e",
         "content": "ret:0\nstdout:\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/main/x86_64/APKINDEX.tar.gz\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/community/x86_64/APKINDEX.tar.gz\n(1/1) Installing openssl (3.5.0-r0)\nExecuting busybox-1.37.0-r18.trigger\nOK: 25 MiB in 45 packages\nDownloading https://get.helm.sh/helm-v3.18.3-linux-amd64.tar.gz\nPreparing to install helm into /usr/local/bin\nhelm installed into /usr/local/bin/helm\n\nstderr:\n\n"
+    },
+    {
+        "content": "Helm已成功安装到`/usr/local/bin/helm`。我们现在可以使用Helm来调试您的问题了。\n\n让我们再次尝试使用Helm的`--debug`标志来安装并查看详细的输出，以确定为什么`appmanager.server.jwtSecretKey`没有被正确设置。\n\n我将执行以下命令：\n\n```bash\nhelm install sreworks sreworks-0.1.1.tgz --debug\n```\n\n请稍等，我将执行这个命令。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_d057aea7168c409aad36eb",
+                "function": {
+                    "arguments": "{\"shell\": \"helm install sreworks sreworks-0.1.1.tgz --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_d057aea7168c409aad36eb",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
     }
 ]

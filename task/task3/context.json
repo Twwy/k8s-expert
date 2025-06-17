@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_6772fd38e61242b4806850",
         "content": "ret:0\nstdout:\n./sreworks/charts/appmanager/templates/server-configmap.yaml\n\nstderr:\n\n"
+    },
+    {
+        "content": "已找到 `server-configmap.yaml` 文件，其位于解压后的文件中的路径为 `./sreworks/charts/appmanager/templates/server-configmap.yaml`。\n\n接下来，根据用户遇到的错误信息“Error: execution error at (sreworks/charts/appmanager/templates/server-configmap.yaml:36:32): appmanager.server.jwtSecretKey is required”，我们需要检查这个配置文件中关于 `appmanager.server.jwtSecretKey` 的设置。让我们查看该文件第36行附近的内容。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_474b545514934ba2b1213b",
+                "function": {
+                    "arguments": "{\"shell\": \"head -n 36 ./sreworks/charts/appmanager/templates/server-configmap.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_474b545514934ba2b1213b",
+        "content": "ret:0\nstdout:\n{{- if eq .Values.installMode \"default\" -}}\napiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: {{ template \"name.server-configmap\" . }}\ndata:\n  STORAGE_CLASS: {{ .Values.global.storageClass | default \"alicloud-disk-available\" | quote }}\n  DB_HOST: {{ template \"server.database.host\" . }}\n  DB_PORT: {{ .Values.server.database.port | default \"3306\" | quote }}\n  DB_USER: {{ .Values.server.database.user | quote }}\n  DB_PASSWORD: {{ .Values.server.database.password | quote }}\n  DB_NAME: {{ .Values.server.database.name | default \"appmanager\" | quote }}\n  APPMANAGER_DB_HOST: {{ template \"server.database.host\" . }}\n  APPMANAGER_DB_PORT: {{ .Values.server.database.port | default \"3306\" | quote }}\n  APPMANAGER_DB_USER: {{ .Values.server.database.user | quote }}\n  APPMANAGER_DB_PASSWORD: {{ .Values.server.database.password | quote }}\n  APPMANAGER_DB_NAME: {{ .Values.server.database.name | default \"appmanager\" | quote }}\n  APPMANAGER_DAG_LOCAL_POOL_SIZE: \"100\"\n  APPMANAGER_PACKAGE_DRIVER: {{ .Values.server.package.driver | quote }}\n  APPMANAGER_PACKAGE_ENDPOINT: {{ template \"server.package.endpoint\" . }}\n  APPMANAGER_PACKAGE_ENDPOINT_PROTOCOL: {{ .Values.server.package.endpointProtocol| default \"http://\" | quote }}\n  APPMANAGER_PACKAGE_ACCESS_KEY: {{ .Values.server.package.accessKey | quote }}\n  APPMANAGER_PACKAGE_SECRET_KEY: {{ .Values.server.package.secretKey | quote }}\n  APPMANAGER_PACKAGE_BUCKET_NAME: {{ .Values.server.package.bucketName | default \"appmanager\" | quote }}\n  APPMANAGER_DAG_BUCKET_NAME: {{ .Values.server.dag.bucketName | default \"appmanager-dag\" | quote }}\n  APPMANAGER_REDIS_HOST: {{ template \"server.redis.host\" . }}\n  APPMANAGER_REDIS_PORT: {{ .Values.server.redis.port | default \"6379\" | quote }}\n  APPMANAGER_REDIS_DATABASE: {{ .Values.server.redis.database | default \"0\" | quote }}\n  APPMANAGER_REDIS_PASSWORD: {{ .Values.server.redis.password | quote }}\n  APPMANAGER_ENV: {{ .Values.server.env | default \"prod\" | quote }}\n  APPMANAGER_ROCKETMQ_NAMESRV_ENDPOINT: {{ template \"server.rocketmq.namesrv\" . }}\n  APPMANAGER_ACCESS_ID: {{ .Values.server.accessId | quote }}\n  APPMANAGER_ACCESS_SECRET: {{ .Values.server.accessSecret | quote }}\n  APPMANAGER_CLIENT_ID: {{ .Values.server.clientId | quote }}\n  APPMANAGER_CLIENT_SECRET: {{ .Values.server.clientSecret | quote }}\n  APPMANAGER_JWT_SECRET_KEY: {{ required \"appmanager.server.jwtSecretKey is required\"  .Values.server.jwtSecretKey | quote }}\n\nstderr:\n\n"
     }
 ]

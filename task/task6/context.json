@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_05643dd654994c6aa69f2d",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
+    },
+    {
+        "content": "看起来系统中没有安装 `helm`，这是一个用于管理 Kubernetes 应用程序的包管理器。在我们能够继续进行安装之前，我将首先安装 `helm`。\n\n让我先安装 `helm`，然后再尝试重新运行安装命令。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_a5e58fa790d9402794f7c4",
+                "function": {
+                    "arguments": "{\"shell\": \"sudo apt-get update && sudo apt-get install -y helm\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_a5e58fa790d9402794f7c4",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: sudo: not found\n\n"
     }
 ]

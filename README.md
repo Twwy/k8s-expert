@@ -36,7 +36,9 @@
         "title": "重新打包修改后的配置",
         "description": "修改完成后，重新打包相关文件为tgz格式，确保改动被包括在内。",
         "executor": "explorer",
-        "id": "task5"
+        "id": "task5",
+        "result": "成功将修改后的 Helm Chart 重新打包为 `sreworks-0.1.1-fixed.tgz`。现在，这个包应该包含了所需的 `appmanager.server.jwtSecretKey` 值，并且可以用于安装而不会遇到之前的错误。\n\n如果您需要进一步的帮助来安装这个新的 Helm 包，请告诉我。否则，您现在可以使用新生成的 `.tgz` 文件来进行安装了。",
+        "finish": true
     },
     {
         "title": "重新尝试安装sreworks",

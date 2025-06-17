@@ -106,5 +106,25 @@
         "role": "tool",
         "tool_call_id": "call_1c6a120a409741e89a3402",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: apt-get: not found\n\n"
+    },
+    {
+        "content": "看起来`apt-get`命令也未在当前环境中找到。这可能是因为您正在使用一个没有预装完整包管理工具的基础镜像。不过，我们可以尝试使用`apk`（Alpine Linux的包管理器）来安装`curl`，因为很多轻量级Docker镜像都基于Alpine Linux。\n\n让我们试着用`apk`来安装`curl`。如果成功了，我们就可以继续安装Helm并调试您的问题。\n\n```bash\napk add --no-cache curl\n```\n\n现在我将执行这个命令以安装`curl`。请稍等。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_0eab2297b2b94836ab6179",
+                "function": {
+                    "arguments": "{\"shell\": \"apk add --no-cache curl\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_0eab2297b2b94836ab6179",
+        "content": "ret:0\nstdout:\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/main/x86_64/APKINDEX.tar.gz\nfetch https://dl-cdn.alpinelinux.org/alpine/v3.22/community/x86_64/APKINDEX.tar.gz\n(1/1) Installing curl (8.14.1-r0)\nExecuting busybox-1.37.0-r18.trigger\nOK: 24 MiB in 44 packages\n\nstderr:\n\n"
     }
 ]

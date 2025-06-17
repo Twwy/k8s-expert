@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_f532274d6504490a88c0bc",
         "content": "ret:0\nstdout:\n  APPMANAGER_ROCKETMQ_NAMESRV_ENDPOINT: {{ template \"server.rocketmq.namesrv\" . }}\n  APPMANAGER_ACCESS_ID: {{ .Values.server.accessId | quote }}\n  APPMANAGER_ACCESS_SECRET: {{ .Values.server.accessSecret | quote }}\n  APPMANAGER_CLIENT_ID: {{ .Values.server.clientId | quote }}\n  APPMANAGER_CLIENT_SECRET: {{ .Values.server.clientSecret | quote }}\n  APPMANAGER_JWT_SECRET_KEY: {{ required \"appmanager.server.jwtSecretKey is required\"  .Values.server.jwtSecretKey | quote }}\n  CLOUD_TYPE: {{ .Values.server.cloudType | default \"PaaS\" | quote }}\n  JVM_XMX: {{ .Values.server.jvmXMX | default \"4000m\" | quote }}\n  DOCKER_HOST: {{ .Values.server.docker.host | default \"tcp://127.0.0.1:2375\" | quote }}\n  DOCKER_REGISTRY: {{ .Values.server.docker.registry | default \"reg.docker.alibaba-inc.com\" | quote }}\n  DOCKER_NAMESPACE: {{ .Values.server.docker.namespace | default \"sw\" | quote }}\n\nstderr:\n\n"
+    },
+    {
+        "content": "在 `server-configmap.yaml` 文件中，`appmanager.server.jwtSecretKey` 参数确实存在，并且其值是必需的。这表明在您的 Helm 价值文件（通常是 `values.yaml`）中，您需要提供一个具体的 `jwtSecretKey` 值。\n\n现在，我将检查并更新 `charts/appmanager/values.yaml` 文件来确保 `appmanager.server.jwtSecretKey` 已设置为一个有效的密钥值。如果没有找到该参数，或者它的值为空或无效，我会添加/更新它。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_ebaf3719dd6c42b8bc3fce",
+                "function": {
+                    "arguments": "{\"shell\": \"cat temp/sreworks/charts/appmanager/values.yaml | grep -C 5 'jwtSecretKey'\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_ebaf3719dd6c42b8bc3fce",
+        "content": "ret:0\nstdout:\n  jvmXMX: \"4000m\"\n  accessId: superuser\n  accessSecret: yJfIYmjAiCL0ondV3kY7e5x6kVTpvC3h\n  clientId: superclient\n  clientSecret: stLCjCPKbWmki65DsAj2jPoeBLPimpJa\n  #jwtSecretKey: 3d8e06065426\n  kafkaBrokerPort: 9092\n  enableAuth: true\n  docker:\n    enableKaniko: true\n    secret: \"server-docker-secret\"\n\nstderr:\n\n"
     }
 ]

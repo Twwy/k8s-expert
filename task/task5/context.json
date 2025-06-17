@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_edb24368d5634e40bbe9a1",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: sudo: not found\n\n"
+    },
+    {
+        "content": "看起来在这个环境中并没有安装 `sudo`，而且可能也没有权限直接使用 `apt-get`。但是，我可以尝试通过另一种方式来安装 Helm。我将直接下载并配置 Helm 的二进制文件，而不通过包管理器。\n\n让我继续尝试直接下载并设置 Helm。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_3b7bfb5e53504028bedbe4",
+                "function": {
+                    "arguments": "{\"shell\": \"curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && chmod 700 get_helm.sh && ./get_helm.sh\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_3b7bfb5e53504028bedbe4",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: curl: not found\n\n"
     }
 ]

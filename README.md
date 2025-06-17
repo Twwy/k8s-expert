@@ -18,7 +18,9 @@
     {
         "title": "定位问题配置文件",
         "description": "在解压后的文件中找到server-configmap.yaml文件，并确认其位置。",
-        "id": "task3"
+        "id": "task3",
+        "result": "`server-configmap.yaml` 文件中确实需要 `appmanager.server.jwtSecretKey` 的值。具体来说，该配置项在此文件的第36行被标记为必需（required）。\n\n错误信息指出：`appmanager.server.jwtSecretKey is required`，这意味着在安装过程中必须提供这个值。要解决这个问题，您需要在您的 Helm 安装命令中通过 `--set` 参数设置 `server.jwtSecretKey` 的值，或者在您的自定义 `values.yaml` 文件中指定它。\n\n如果您还没有设置，请使用以下方式之一来设置：\n\n1. **通过 `--set` 参数**：\n   ```bash\n   helm install sreworks-0.1.1.tgz --set server.jwtSecretKey=your-secret-key\n   ```\n\n2. **通过自定义 `values.yaml` 文件**：\n   创建或编辑一个名为 `my-values.yaml` 的文件，并添加如下内容：\n   ```yaml\n   server:\n     jwtSecretKey: your-secret-key\n   ```\n   然后使用这个文件进行安装：\n   ```bash\n   helm install sreworks-0.1.1.tgz -f my-values.yaml\n   ```\n\n请将 `your-secret-key` 替换为您实际的安全密钥。这样应该可以解决安装过程中遇到的问题。",
+        "finish": true
     },
     {
         "title": "查看并修改配置",

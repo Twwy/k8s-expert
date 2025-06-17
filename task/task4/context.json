@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_5825f8bf54e049318a35af",
         "content": "ret:127\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "看起来在尝试使用 `helm install` 命令进行安装并生成调试输出时遇到了问题，返回了错误代码127。这通常意味着命令未找到或无法执行。可能的原因是 Helm 客户端没有被正确安装或者没有在PATH环境变量中。\n\n为了进一步解决问题，我将首先检查 Helm 是否已安装，并确保我们可以使用它。如果 Helm 没有安装，我们将需要先安装 Helm。让我们开始检查 Helm 的安装情况。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_2b17ddc068d84fbdbae485",
+                "function": {
+                    "arguments": "{\"shell\": \"command -v helm\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_2b17ddc068d84fbdbae485",
+        "content": "ret:127\nstdout:\n\nstderr:\n\n"
     }
 ]

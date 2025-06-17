@@ -186,5 +186,25 @@
         "role": "tool",
         "tool_call_id": "call_d057aea7168c409aad36eb",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
+    },
+    {
+        "content": "看起来即使我们已经安装了Helm，系统仍然无法找到`helm`命令。这可能是因为Helm的安装路径没有被添加到系统的PATH环境变量中。\n\n让我们确认Helm是否确实安装在`/usr/local/bin/helm`位置，并且该路径是否包含在PATH中。如果不在PATH中，我们将手动将其添加进去。\n\n首先，我将检查Helm是否存在以及当前的PATH设置：\n\n```bash\nls -l /usr/local/bin/helm\necho $PATH\n```\n\n请稍等，我将执行这些命令。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_58ee582526264ba7964d94",
+                "function": {
+                    "arguments": "{\"shell\": \"ls -l /usr/local/bin/helm && echo $PATH\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_58ee582526264ba7964d94",
+        "content": "ret:0\nstdout:\n-rwxr-xr-x    1 root     root      59715768 Jun 17 22:05 /usr/local/bin/helm\n/sbin:/usr/sbin:/bin:/usr/bin\n\nstderr:\n\n"
     }
 ]

@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_2b9fb94a4c124913ba56f4",
         "content": "ret:0\nstdout:\n  jwtSecretKey: \n\nstderr:\n/bin/sh: openssl: not found\n/bin/sh: openssl: not found\n\n"
+    },
+    {
+        "content": "看起来在当前环境中 `openssl` 没有被安装，因此我无法直接使用它来生成一个随机的密钥。不过，我们可以使用其他方法来生成这个密钥。例如，可以使用 `/dev/urandom` 和 `base64` 命令来生成一个类似的随机字符串。\n\n接下来，我会用这种方法生成一个随机密钥，并更新 `values.yaml` 文件。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_e43704045db24d4eb270a2",
+                "function": {
+                    "arguments": "{\"shell\": \"key=$(head -c 32 /dev/urandom | base64); sed -i '/#jwtSecretKey:/ s/^#//' temp/sreworks/charts/appmanager/values.yaml; sed -i \\\"/#jwtSecretKey:/c\\\\  jwtSecretKey: ${key}\\\" temp/sreworks/charts/appmanager/values.yaml; cat temp/sreworks/charts/appmanager/values.yaml | grep 'jwtSecretKey:'\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_e43704045db24d4eb270a2",
+        "content": "ret:0\nstdout:\n  jwtSecretKey: \n\nstderr:\n\n"
     }
 ]

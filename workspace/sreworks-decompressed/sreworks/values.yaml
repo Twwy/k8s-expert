@@ -153,3 +153,6 @@ appmanager:
 
 appmanager:
   server:
+appmanager:
+  server:
+    jwtSecretKey: gt7BTdZLQFfC70aT1DR46uqfaB3nRiJ6

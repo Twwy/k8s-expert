@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_65751ba7a3ad49eea7d04d",
         "content": "ret:1\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "在 `sreworks/charts/appmanager/values.yaml` 文件中没有直接找到与 `appmanager.server.jwtSecretKey` 相关的配置。这意味着我们需要手动为这个键添加一个值。\n\n接下来，我将向 `values.yaml` 文件中添加 `appmanager.server.jwtSecretKey` 的设置。出于安全考虑，我们应使用一个强随机字符串作为 JWT 密钥。让我们生成一个随机密钥并将其添加到配置文件中。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_9024137e9bef4c129702ba",
+                "function": {
+                    "arguments": "{\"shell\": \"openssl rand -base64 32 | tr -d '\\n' && echo '' && sed -i '/^appmanager:/a\\\\  server:\\\\n    jwtSecretKey: '\\\"`openssl rand -base64 32 | tr -d '\\n'`\\\" sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_9024137e9bef4c129702ba",
+        "content": "ret:0\nstdout:\n\n\nstderr:\n/bin/sh: openssl: not found\n/bin/sh: openssl: not found\n\n"
     }
 ]

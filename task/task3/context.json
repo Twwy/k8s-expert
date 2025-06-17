@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_9cc072feaa3b4136bb411f",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
+    },
+    {
+        "content": "看起来`helm`命令行工具没有在当前环境中安装。为了继续解决这个问题，我们需要先安装Helm。您可以在Linux系统上使用以下步骤来安装Helm：\n\n1. 下载最新的Helm版本。\n2. 解压下载的文件并将其移动到您的PATH中。\n\n我将为您提供一个示例命令来安装Helm v3（这是目前推荐使用的版本）。让我们开始安装Helm，然后我们可以用它来调试您的Helm图表。\n\n```bash\ncurl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3\nchmod 700 get_helm.sh\n./get_helm.sh\n```\n\n现在，我将执行这些命令以安装Helm。请稍等。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_b5718f390ae14a5a911a59",
+                "function": {
+                    "arguments": "{\"shell\": \"curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && chmod 700 get_helm.sh && ./get_helm.sh\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_b5718f390ae14a5a911a59",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: curl: not found\n\n"
     }
 ]

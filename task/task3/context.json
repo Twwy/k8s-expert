@@ -86,5 +86,25 @@
         "role": "tool",
         "tool_call_id": "call_b5718f390ae14a5a911a59",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: curl: not found\n\n"
+    },
+    {
+        "content": "看起来`curl`命令也没有安装在当前环境中。为了能够下载并安装Helm，我们需要先安装`curl`。在基于Debian的系统（如您所使用的bookworm）上，我们可以使用`apt-get`来安装`curl`。\n\n让我们先安装`curl`，然后再次尝试安装Helm。\n\n```bash\napt-get update && apt-get install -y curl\n```\n\n现在我将执行这些命令以安装`curl`。请稍等。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_1c6a120a409741e89a3402",
+                "function": {
+                    "arguments": "{\"shell\": \"apt-get update && apt-get install -y curl\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_1c6a120a409741e89a3402",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: apt-get: not found\n\n"
     }
 ]

@@ -86,5 +86,25 @@
         "role": "tool",
         "tool_call_id": "call_d36d28e5cb824af19ec59f",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: apt-get: not found\n\n"
+    },
+    {
+        "content": "看起来当前环境既没有 `apt-get` 也没有 `curl`，这使得安装 Helm 变得复杂。不过，我可以通过直接下载 Helm 的二进制文件并手动设置它来解决这个问题。\n\n让我尝试直接从 Helm 的官方发布页面下载最新的稳定版本，并将其放置在 PATH 中。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_39b24e87cc8e4b87b54819",
+                "function": {
+                    "arguments": "{\"shell\": \"mkdir -p ~/bin && wget -O ~/bin/helm https://get.helm.sh/helm-v3.9.0-linux-amd64.tar.gz && tar -C ~/bin --strip-components 1 -xvzf ~/bin/helm linux-amd64/helm && chmod +x ~/bin/helm\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_39b24e87cc8e4b87b54819",
+        "content": "ret:0\nstdout:\nlinux-amd64/helm\n\nstderr:\nConnecting to get.helm.sh (13.107.246.40:443)\nsaving to '~/bin/helm'\nhelm                 100% |********************************| 13.3M  0:00:00 ETA\n'~/bin/helm' saved\n\n"
     }
 ]

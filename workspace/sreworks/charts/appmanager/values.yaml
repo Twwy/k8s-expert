@@ -66,3 +66,6 @@ gateway:
   account_super_client_secret: default
   account_super_id: admin
   account_super_secret_key: default
+appmanager:
+  server:
+    jwtSecretKey: "example-secret-key"

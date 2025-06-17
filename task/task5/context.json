@@ -26,5 +26,25 @@
         "role": "tool",
         "tool_call_id": "call_b2a40326cd9c4f18938cf5",
         "content": "ret:0\nstdout:\n\nstderr:\n\n"
+    },
+    {
+        "content": "成功解压了 `sreworks-0.1.1.tgz` 文件。接下来，我们需要修改 `values.yaml` 文件以提供 `appmanager.server.jwtSecretKey` 的值。我将添加一个示例的密钥，当然，在生产环境中，这个密钥应该是一个强且随机生成的字符串。\n\n现在让我们找到正确的 `values.yaml` 并进行编辑。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_c5f77e2953e1403fb73fb6",
+                "function": {
+                    "arguments": "{\"shell\": \"echo 'appmanager:\\n  server:\\n    jwtSecretKey: \\\"example-secret-key\\\"' >> sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_c5f77e2953e1403fb73fb6",
+        "content": "ret:0\nstdout:\n\nstderr:\n\n"
     }
 ]

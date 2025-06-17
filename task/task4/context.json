@@ -186,5 +186,25 @@
         "role": "tool",
         "tool_call_id": "call_05c8db76bae44017bc550a",
         "content": "ret:0\nstdout:\n/bin/sh: helm: not found\n\nstderr:\n\n"
+    },
+    {
+        "content": "看起来尽管我们已经安装了 Helm，但在当前环境中仍然找不到 `helm` 命令。这可能是因为 `/usr/local/bin` 目录没有被添加到 PATH 环境变量中。\n\n让我们先检查一下 `/usr/local/bin` 是否在 PATH 中，如果不在，我们将临时将它添加到 PATH 中，然后再次尝试运行 Helm 安装命令。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_fa83c2538d254cd6bea77a",
+                "function": {
+                    "arguments": "{\"shell\": \"echo $PATH; export PATH=$PATH:/usr/local/bin; helm version\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_fa83c2538d254cd6bea77a",
+        "content": "ret:0\nstdout:\n/sbin:/usr/sbin:/bin:/usr/bin\nversion.BuildInfo{Version:\"v3.18.3\", GitCommit:\"6838ebcf265a3842d1433956e8a622e3290cf324\", GitTreeState:\"clean\", GoVersion:\"go1.24.4\"}\n\nstderr:\n\n"
     }
 ]

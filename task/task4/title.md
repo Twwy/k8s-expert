@@ -1,0 +1,1 @@
+配置appmanager.server.jwtSecretKey

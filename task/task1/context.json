@@ -1,0 +1,23 @@
+{
+    "final_result": "已从指定URL下载sreworks-0.1.1.tgz文件，并通过md5sum完成了文件完整性的验证。",
+    "history": [
+        {
+            "url": "about:blank",
+            "result": [
+                {
+                    "content": "ret:{return_code}\nstdout:\n{stdout}\nstderr:\n{stderr}\n",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "url": "about:blank",
+            "result": [
+                {
+                    "content": "已从指定URL下载sreworks-0.1.1.tgz文件，并通过md5sum完成了文件完整性的验证。",
+                    "error": null
+                }
+            ]
+        }
+    ]
+}

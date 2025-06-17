@@ -86,5 +86,25 @@
         "role": "tool",
         "tool_call_id": "call_bedcb89b8ec545ea8e5f51",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: python3: not found\n\n"
+    },
+    {
+        "content": "看来当前环境中也没有安装 Python3。在没有 `openssl` 和 `python3` 的情况下，我们可以尝试使用 Bash 自带的功能来生成一个随机字符串作为 JWT 密钥。\n\n我将使用 `/dev/urandom` 与 `base64` 命令结合的方式来生成一个安全的随机密钥，并将其添加到 `values.yaml` 文件中。现在让我们执行这个操作。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_19a43a5d870f41f5bbc909",
+                "function": {
+                    "arguments": "{\"shell\": \"base64 /dev/urandom | tr -d '+=/' | dd bs=32 count=1 2>/dev/null && echo '' && sed -i '/^appmanager:/a\\\\  server:\\\\n    jwtSecretKey: '\\\"`base64 /dev/urandom | tr -d '+=/' | dd bs=32 count=1 2>/dev/null`\\\" sreworks/charts/appmanager/values.yaml\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_19a43a5d870f41f5bbc909",
+        "content": "ret:0\nstdout:\noU8P9njLgqieI58v0KQA1KwmTRwmgrcc\n\nstderr:\n\n"
     }
 ]

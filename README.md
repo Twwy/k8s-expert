@@ -4,7 +4,9 @@
         "title": "访问阿里云官方网站",
         "description": "打开浏览器并进入阿里云官网主页",
         "executor": "browser",
-        "id": "task1"
+        "id": "task1",
+        "result": "Here are the latest news items from Alibaba Cloud:\n\n1. **Platform for AI (PAI) - ArtLab supports building and sharing of AIGC applications based on ComfyUI**\n   - Date: June 9, 2025\n\n2. **Tair (Redis® OSS-Compatible) - Increased Maximum Storage Capacity for ESSD-based Instances**\n   - Date: June 4, 2025\n\n3. **Anti-DDoS - Anti-DDoS Proxy Supports Mutual Authentication**\n   - Date: May 27, 2025\n\n4. **DataWorks - Support for Smoke Testing by Data Studio**\n   - Date: May 26, 2025\n\n5. **Security Center - Security Center Supports Unified Billing and Quota Sharing Across Accounts**\n   - Date: May 21, 2025\n\nThese are some of the most recent updates. For more details, you can visit [Alibaba Cloud News](https://www.alibabacloud.com/news).",
+        "finish": true
     },
     {
         "title": "寻找新闻或公告部分",

@@ -1,0 +1,13 @@
+apiVersion: v1
+description: SREWorks - AppManager - Base
+home: https://tesla.alibaba-inc.com/abm/
+icon: https://img.alicdn.com/tfs/TB1OS0eeMMPMeJjy1XdXXasrXXa-245-91.png
+keywords:
+- bigdata
+maintainers:
+- email: yaoxing.gyx@alibaba-inc.com
+  name: Yaoxing Guo
+name: appmanagerbase
+sources:
+- http://gitlab.alibaba-inc.com/alisre/appmanager-chart-dependency
+version: 1.0.0

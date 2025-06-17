@@ -1,1 +1,41 @@
-/bin/sh: helm: not found
+install.go:225: 2025-06-17 22:19:22.929917896 +0000 UTC m=+0.025121808 [debug] Original chart version: ""
+install.go:242: 2025-06-17 22:19:22.929986054 +0000 UTC m=+0.025189966 [debug] CHART PATH: /__w/k8s-expert/k8s-expert/workspace/sreworks-0.1.1.tgz
+
+Error: INSTALLATION FAILED: Kubernetes cluster unreachable: Get "http://localhost:8080/version": dial tcp [::1]:8080: connect: connection refused
+helm.go:92: 2025-06-17 22:19:22.964112489 +0000 UTC m=+0.059316401 [debug] Get "http://localhost:8080/version": dial tcp [::1]:8080: connect: connection refused
+Kubernetes cluster unreachable
+helm.sh/helm/v3/pkg/kube.(*Client).IsReachable
+	helm.sh/helm/v3/pkg/kube/client.go:137
+helm.sh/helm/v3/pkg/action.(*Install).RunWithContext
+	helm.sh/helm/v3/pkg/action/install.go:235
+main.runInstall
+	helm.sh/helm/v3/cmd/helm/install.go:317
+main.newInstallCmd.func2
+	helm.sh/helm/v3/cmd/helm/install.go:156
+github.com/spf13/cobra.(*Command).execute
+	github.com/spf13/cobra@v1.9.1/command.go:1015
+github.com/spf13/cobra.(*Command).ExecuteC
+	github.com/spf13/cobra@v1.9.1/command.go:1148
+github.com/spf13/cobra.(*Command).Execute
+	github.com/spf13/cobra@v1.9.1/command.go:1071
+main.main
+	helm.sh/helm/v3/cmd/helm/helm.go:91
+runtime.main
+	runtime/proc.go:283
+runtime.goexit
+	runtime/asm_amd64.s:1700
+INSTALLATION FAILED
+main.newInstallCmd.func2
+	helm.sh/helm/v3/cmd/helm/install.go:158
+github.com/spf13/cobra.(*Command).execute
+	github.com/spf13/cobra@v1.9.1/command.go:1015
+github.com/spf13/cobra.(*Command).ExecuteC
+	github.com/spf13/cobra@v1.9.1/command.go:1148
+github.com/spf13/cobra.(*Command).Execute
+	github.com/spf13/cobra@v1.9.1/command.go:1071
+main.main
+	helm.sh/helm/v3/cmd/helm/helm.go:91
+runtime.main
+	runtime/proc.go:283
+runtime.goexit
+	runtime/asm_amd64.s:1700

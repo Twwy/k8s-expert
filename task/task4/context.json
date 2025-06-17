@@ -66,5 +66,25 @@
         "role": "tool",
         "tool_call_id": "call_682ee2b6c9fd480098bb8e",
         "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: curl: not found\nchmod: get_helm.sh: No such file or directory\n/bin/sh: ./get_helm.sh: not found\n\n"
+    },
+    {
+        "content": "看起来 `curl` 命令也未安装在这个环境中，这导致了我们无法下载 Helm 的安装脚本。此外，由于 `get_helm.sh` 脚本没有被下载，因此尝试执行它时也失败了。\n\n我们需要首先安装 `curl` 工具，然后再次尝试获取并安装 Helm。让我们开始安装 `curl`。",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_72810b376e114087aa7a79",
+                "function": {
+                    "arguments": "{\"shell\": \"apt-get update && apt-get install -y curl\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_72810b376e114087aa7a79",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: apt-get: not found\n\n"
     }
 ]

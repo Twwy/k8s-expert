@@ -1,0 +1,3 @@
+<question>需要在sreworks/charts/appmanager/templates/目录下找到server-configmap.yaml文件，这个文件中可能存在错误配置，需要打开并准备对其进行编辑。</question>
+<questionFiles>sreworks/charts/appmanager/templates/server-configmap.yaml</questionFiles>
+<task>{'title': '定位错误配置文件', 'description': '请在sreworks/charts/appmanager/templates/路径下找到server-configmap.yaml配置文件，并将其打开。准备好根据后续指示对可能存在的错误配置进行修改。', 'executor': 'explorer', 'id': 'task3'}</task>

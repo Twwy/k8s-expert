@@ -46,5 +46,25 @@
         "role": "tool",
         "tool_call_id": "call_392a513d930d4e76853471",
         "content": "ret:0\nstdout:\n\nappmanager:\n  server:\nappmanager:\n  server:\n    jwtSecretKey: gt7BTdZLQFfC70aT1DR46uqfaB3nRiJ6\n\nstderr:\n\n"
+    },
+    {
+        "content": "在 `sreworks/values.yaml` 文件中，`appmanager.server.jwtSecretKey` 已经被设置为一个默认值 `gt7BTdZLQFfC70aT1DR46uqfaB3nRiJ6`。这表明在默认情况下，该值是存在的。\n\n如果您仍然遇到错误，可能是因为在安装过程中这个默认值没有被正确使用。我们可以通过以下几种方式解决这个问题：\n\n1. **检查是否通过命令行覆盖了默认值**：如果您在Helm安装命令中使用了`--set`选项来设置`server.jwtSecretKey`，请确保传递的值是正确的。\n2. **直接在values.yaml中确认设置**：如果希望保持配置文件中的设置，请确保在执行Helm安装时引用了正确的values.yaml文件。\n3. **调试YAML渲染**：您还可以尝试使用`--debug`标志来查看Helm如何渲染最终的YAML文件，以确定问题所在。\n\n请问您希望通过哪种方式继续？或者您需要我提供进一步的帮助来调试或修改配置？",
+        "role": "assistant",
+        "tool_calls": [
+            {
+                "id": "call_9cc072feaa3b4136bb411f",
+                "function": {
+                    "arguments": "{\"shell\": \"helm install sreworks sreworks-0.1.1.tgz --debug\"}",
+                    "name": "bash#exec"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_9cc072feaa3b4136bb411f",
+        "content": "ret:127\nstdout:\n\nstderr:\n/bin/sh: helm: not found\n\n"
     }
 ]

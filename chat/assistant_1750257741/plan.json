@@ -3,7 +3,9 @@
         "title": "打开阿里云官网",
         "description": "访问阿里云官方网站主页",
         "executor": "browser",
-        "id": "task1"
+        "id": "task1",
+        "result": "没有找到今天的阿里云新闻。如果您想要获取最新的新闻，建议访问“媒体室”或“阿里巴巴云电子杂志”等相关部分。",
+        "finish": true
     },
     {
         "title": "寻找新闻版块",

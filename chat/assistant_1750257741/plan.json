@@ -19,6 +19,8 @@
         "title": "阅读今日新闻",
         "description": "查看并阅读今天发布的所有相关新闻内容",
         "executor": "browser",
-        "id": "task3"
+        "id": "task3",
+        "result": "Here are the news articles from Alibaba Cloud for today:\n\n1. **Alibaba and SAP Expand Strategic Partnership to Bring AI-Powered Enterprise Solutions to China and Global Markets**\n   - Date: June 5, 2025\n   - Author: Alibaba Cloud Community\n   - [Read More](https://www.alibabacloud.com/blog/alibaba-and-sap-expand-strategic-partnership-to-bring-ai-powered-enterprise-solutions-to-china-and-global-markets_602284)\n   - Summary: This article introduces the partnership between Alibaba and SAP to integrate Qwen into SAP's Generative AI Hub in China.\n\n2. **[Infographic] Highlights | Database New Features in April 2025**\n   - Date: May 30, 2025\n   - Author: ApsaraDB\n   - [Read More](https://www.alibabacloud.com/blog/infographic-highlights-%7C-database-new-features-in-april-2025_602271)\n   - Summary: This infographic highlights the new features introduced in the database in April 2025.\n\n3. **GoTo and Alibaba Cloud Complete Cloud Migration for GoTo Financial, Advancing Strategic Partnership**\n   - Date: June 6, 2025\n   - Author: Alibaba Cloud Community\n   - [Read More](https://www.alibabacloud.com/blog/goto-and-alibaba-cloud-complete-cloud-migration-for-goto-financial-advancing-strategic-partnership_602287)\n   - Summary: GoTo Group and Alibaba Cloud announced the successful migration of GoTo Financial’s infrastructure to Alibaba Cloud's data centers in Jakarta, Indonesia.",
+        "finish": true
     }
 ]

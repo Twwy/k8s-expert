@@ -1,0 +1,17 @@
+<question>帮我看一下今天阿里云有什么新闻</question>
+<plan>
+[
+  {"title": "访问阿里云官方网站", "description": "打开浏览器并访问阿里云的官方网站主页。", "executor": "browser", "id": "task1"},
+  {"title": "寻找新闻或公告板块", "description": "在阿里云官网首页定位到新闻、最新动态或者公告的部分。", "executor": "browser", "id": "task2"},
+  {"title": "筛选今日新闻", "description": "从找到的新闻列表中筛选出今天发布的新闻内容。", "executor": "browser", "id": "task3"},
+  {"title": "整理新闻概要", "description": "对于每条今日新闻，简要记录其标题和主要内容。", "executor": "browser", "id": "task4"}
+]
+</plan>
+<task>
+{
+  'title': '访问阿里云官方网站',
+  'description': '打开浏览器并访问阿里云的官方网站主页。',
+  'executor': 'browser',
+  'id': 'task1'
+}
+</task>

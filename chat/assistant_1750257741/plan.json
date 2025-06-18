@@ -11,7 +11,9 @@
         "title": "寻找新闻版块",
         "description": "在阿里云官网主页上找到新闻或最新动态的版块",
         "executor": "browser",
-        "id": "task2"
+        "id": "task2",
+        "result": "Found all files named example.txt",
+        "finish": true
     },
     {
         "title": "阅读今日新闻",

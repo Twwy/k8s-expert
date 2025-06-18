@@ -3,7 +3,9 @@
         "title": "打开阿里云官方网站",
         "description": "访问阿里云官网主页，寻找新闻或公告入口",
         "executor": "browser",
-        "id": "task1"
+        "id": "task1",
+        "result": "在阿里云网站上没有发现今天的新闻或公告。但我发现了一个实时在线码上论坛，它是关于ApsaraMQ for Kafka 和 ApsaraMQ for Confluent 的，它将于2025年6月16日下午2点与你们见面。如果您需要更多相关信息，请咨询阿里云网站上的'Press Room'或者'新闻与信息'章节。",
+        "finish": true
     },
     {
         "title": "寻找今日新闻或公告",

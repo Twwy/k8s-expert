@@ -19,6 +19,8 @@
         "title": "确认今天的新闻",
         "description": "浏览该部分的内容，确认是否有今天发布的新闻或重要更新，并记录下来。",
         "executor": "browser",
-        "id": "task3"
+        "id": "task3",
+        "result": "当前搜索今天的阿里云新闻时遇到 reCAPTCHA 验证，未能继续完成搜索。请手动完成验证后重新尝试。",
+        "finish": true
     }
 ]

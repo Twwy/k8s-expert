@@ -11,7 +11,9 @@
         "title": "寻找新闻或公告部分",
         "description": "在阿里云官网上找到新闻、公告或者博客部分，这是最新信息通常发布的地方。",
         "executor": "browser",
-        "id": "task2"
+        "id": "task2",
+        "result": "尝试通过访问阿里云官网以及尝试通过Google搜索来找到阿里云的新闻，但遇到了reCAPTCHA验证和404错误页面。当前没有成功找到最新的新闻。",
+        "finish": true
     },
     {
         "title": "确认今天的新闻",

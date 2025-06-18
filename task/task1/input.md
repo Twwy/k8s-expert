@@ -1,0 +1,4 @@
+<question>帮我看一下今天aliyun有什么新闻</question>
+<questionFiles></questionFiles>
+<plan>[{"title": "访问阿里云官方网站", "description": "找到并打开阿里云的官方网站，准备查看最新消息。", "executor": "browser", "id": "task1"}, {"title": "寻找新闻或公告部分", "description": "在网站上定位到显示最新新闻、活动或官方公告的部分。", "executor": "browser", "id": "task2"}, {"title": "检查今日更新", "description": "浏览这些新闻或公告以识别出今天发布的任何新内容。", "executor": "browser", "id": "task3"}, {"title": "记录重要信息", "description": "将找到的相关新闻标题及其链接记录下来，以便进一步阅读或分享。", "executor": "explorer", "id": "task4"}]</plan>
+<task>{"title":"访问阿里云官方网站","description":"找到并打开阿里云的官方网站（https://www.aliyun.com/），准备查看最新消息。请注意观察首页是否有明显的新闻或公告区域，并准备好进入下一步任务。","executor":"browser","id":"task1"}</task>

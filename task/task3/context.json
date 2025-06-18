@@ -1,0 +1,23 @@
+{
+    "final_result": "当前搜索今天的阿里云新闻时遇到 reCAPTCHA 验证，未能继续完成搜索。请手动完成验证后重新尝试。",
+    "history": [
+        {
+            "url": "about:blank",
+            "result": [
+                {
+                    "content": "🔍  Searched for \"今天的阿里云新闻\" in Google",
+                    "error": null
+                }
+            ]
+        },
+        {
+            "url": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3D%25E4%25BB%258A%25E5%25A4%25A9%25E7%259A%2584%25E9%2598%25BF%25E9%2587%258C%25E4%25BA%2591%25E6%2596%25B0%25E9%2597%25BB%26udm%3D14%26sei%3DQ19SaIbAO7qf5NoPpPqvoAg&q=EgQUoU5mGMS-ycIGIjDt3Y1EflZmnp85h4web4Og_f5HCPhPlL37EwxlXsZ0dWKzUuqgIJ-qFWCEmBH3HvEyAVJaAUM",
+            "result": [
+                {
+                    "content": "当前搜索今天的阿里云新闻时遇到 reCAPTCHA 验证，未能继续完成搜索。请手动完成验证后重新尝试。",
+                    "error": null
+                }
+            ]
+        }
+    ]
+}

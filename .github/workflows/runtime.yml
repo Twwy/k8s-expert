@@ -11,7 +11,6 @@ on:
        options:
        - browser
        - explorer
-       - planner
 
 jobs:
   build-and-push:
@@ -37,8 +36,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./runtime/${{github.event.inputs.agent}}
-          file: ./runtime/${{github.event.inputs.agent}}/Dockerfile
+          context: ./agent/${{github.event.inputs.agent}}
+          file: ./agent/${{github.event.inputs.agent}}/Dockerfile
           tags: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-${{github.event.inputs.agent}}:latest
           push: true
 

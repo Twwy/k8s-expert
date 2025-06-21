@@ -2,13 +2,13 @@
 
 import os
 import sys
-import tempfile
 import yaml
 import json
 from openai import OpenAI
 import subprocess
-from agitops.util import run_command
-from agitops.tool import ToolHandler
+import argparse
+# from agitops.util import run_command
+# from agitops.tool import ToolHandler
 
 class ToolBash():
     def __init__(self, cwd=None):
@@ -54,8 +54,8 @@ class ExecutorAgent():
         # llm_model: qwen-max
         # llm_api_url: http://
         # llm_api_key: *****
-        # work_root_path: *
-        # task_name: *
+        # workspace_path: *
+        # task_path: *
 
         if os.path.exists(conf_path):
             h = open(conf_path, "r")
@@ -68,20 +68,15 @@ class ExecutorAgent():
             print(f"not found {conf_path}")
             sys.exit(1)
 
-        conf_keys = ["llm_model", "llm_api_url", "llm_api_key", "workspace_path"]
+        conf_keys = ["llm_model", "llm_api_url", "llm_api_key", "workspace_path", "task_path"]
         for conf_key in conf_keys:
             if conf_key not in self.conf:
                 print(f"not found {conf_key} in {conf_path}")
                 sys.exit(1)
 
         self.workspace_path = self.conf["workspace_path"]
-
-        if os.path.isfile(self.workspace_path):
-            os.remove(self.workspace_path)
-            os.makedirs(self.workspace_path, exist_ok=True)
-            # 存放一个文件，避免第一轮没有文件
-            with open(os.path.join(self.workspace_path, ".gitignore"), 'w') as f:
-                pass 
+        with open(os.path.join(self.workspace_path, "input.md"), 'r') as f:
+            self.requirement = f.read()
 
         self.tools = {
             "bash": ToolBash(cwd=self.workspace_path)
@@ -92,13 +87,51 @@ class ExecutorAgent():
             base_url=self.conf["llm_api_url"],
         )
 
-    def ask(self, question, number=3):
+    def append_stack_task(self, questions):
+        stackData = {
+            "loopCnt": 0,
+            "taskCnt": 0,
+            "stack": []
+        }
+        if os.path.isfile(self.task_path):
+            os.remove(self.task_path)
+            os.makedirs(self.task_path, exist_ok=True)
+        else:
+            with open(os.path.join(self.task_path, "stack.json"), 'r') as f:
+                stackData = json.loads(f.read())
+
+        stackData["loopCnt"] += 1
+        stackLoop = {
+            "loop": stackData["loopCnt"],
+            "tasks": []
+        }
+        for question in questions:
+            taskName = f"task{stackData['taskCnt']}"
+            task_path = os.path.join(self.task_path, taskName)
+            os.makedirs(task_path, exist_ok=True)
+            with open(os.path.join(task_path, "input.json"), 'w') as f:
+                f.write(json.dumps(question, indent=4, ensure_ascii=False))
+
+            stackData["taskCnt"] += 1
+            stackLoop["tasks"].append({
+                "question": question,
+                "task": f"task{stackData['taskCnt']}",
+                "status": "pending",
+            })
+
+        stackData["stack"].append(stackLoop)
+
+        with open(os.path.join(self.task_path, "stack.json"), 'w') as f:
+            f.write(json.dumps(stackData, indent=4, ensure_ascii=False))
+        
+
+    def ask(self, number=3):
         messages = [{"role": "system", "content": self.sys_prompt}]
 
         questions = []
         for i in range(number):
             if i == 0:
-                messages.append({"role": "user", "content": f"<requirement>{question}</requirement>{self.ask_prompt}"})
+                messages.append({"role": "user", "content": f"<requirement>{self.requirement}</requirement>{self.ask_prompt}"})
             else:
                 messages.append({"role": "user", "content": f"除了这个问题，还有其他什么问题吗？不要和前面已有的问题完全重复。请继续使用包含 question,answer_deliverable 的JSON返回"})
 
@@ -118,18 +151,22 @@ class ExecutorAgent():
             if len(questions) >= number:
                 break
 
+        self.append_stack_task(questions)
         return questions
 
-    def reslove(self, question, task):
+    def reslove(self, task_path, max_steps=30):
+
+        with open(task_path, 'r') as f:
+            task = json.loads(f.read())
 
         messages = [
             {"role": "system", "content": self.sys_prompt},
-            {"role": "user", "content": f"<requirement>{question}</requirement><task>{task}</task>{self.reslove_prompt}"}
+            {"role": "user", "content": f"<requirement>{self.requirement}</requirement><task>{task}</task>{self.reslove_prompt}"}
         ]
 
         finalAnswer = None
 
-        for i in range(30):
+        for i in range(max_steps):
             tools = [t.schema for t in self.tools.values()]
             completion = self.llm_client.chat.completions.create(
                 model=self.conf["llm_model"],
@@ -176,35 +213,19 @@ if __name__ == "__main__":
 
     agent = ExecutorAgent("/etc/gitops.yaml")
 
-    requirement = "帮我看一下今天aliyun有什么新闻"
+    parser = argparse.ArgumentParser(description="智能体")
+    subparsers = parser.add_subparsers(dest="command")
 
-    questions = agent.ask(requirement, number=3)
-    print(json.dumps(questions, indent=4, ensure_ascii=False))
+    agent_parser = subparsers.add_parser("ask", help="提问")
+    agent_parser = subparsers.add_parser("reslove", help="解决")
+    agent_parser.add_argument("--task-path", help="任务目录", required=True)
 
-    tasks = []
-    for question in questions:
-        result = agent.reslove(requirement, json.dumps(question, ensure_ascii=False))
-        tasks.append({"question": question, "result":result})
+    args = parser.parse_args()
 
-    print(json.dumps(tasks, indent=4, ensure_ascii=False))
-
-    # result = agent.reslove("帮我看一下今天aliyun有什么新闻", """
-    # {
-    #     "question": "如何获取最新的阿里云新闻信息？",
-    #     "answer_deliverable": [
-    #         "提供今日阿里云官方网站或官方社交媒体账号发布的最新消息链接",
-    #         "列出今天阿里云发布的重要公告或更新摘要"
-    #     ]
-    # }
-    # """)
-    # print(result)
-    
-    # next_loop = True
-    # count = 0
-    # while next_loop:
-    #     if count > 30:
-    #         print("max loop 30")
-    #         sys.exit(1)
-    #     count += 1
-    #     print(f"\nthought loop: {count}", flush=True)
-    #     next_loop = agent.run()
+    if args.command == "ask":
+        agent.ask()
+    elif args.command == "reslove":
+        agent.reslove(args.task_path)
+    else:
+        print("unknown command")
+        sys.exit(1)

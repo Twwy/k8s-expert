@@ -12,7 +12,7 @@ from agitops.tool import ToolHandler
 class ExecutorAgent():
     sys_prompt = "你是一个任务专家"
     ask_prompt = """
-<requirement>中是用户提出需求，你为了完成这个需求，你会提出什么问题。请使用JSON格式返回。
+<requirement>中是用户提出需求，你为了完成这个需求，你会提出什么问题，请写出最重要的一个问题，使用JSON格式返回。
 返回JSON必须包含字段:
 - question 问题
 - answer_deliverable 答案交付物，使用自然语言描述，比如包含什么的一个文件等
@@ -60,18 +60,33 @@ class ExecutorAgent():
             base_url=self.conf["llm_api_url"],
         )
 
-    def ask(self, question):
-        messages = [
-            {"role": "system", "content": self.sys_prompt},
-            {"role": "user", "content": f"<requirement>{question}</requirement>{self.ask_prompt}"}]
+    def ask(self, question, number=3):
+        messages = [{"role": "system", "content": self.sys_prompt}]
 
-        completion = self.llm_client.chat.completions.create(
-            model=self.conf["llm_model"],
-            messages=messages
-        ).to_dict()
+        questions = []
+        for i in range(number):
+            if i == 0:
+                messages.append({"role": "user", "content": f"<requirement>{question}</requirement>{self.ask_prompt}"})
+            else:
+                messages.append({"role": "user", "content": f"除了这个问题，还有其他什么问题吗？请继续使用包含 question,answer_deliverable,thought 的JSON返回"})
 
-        print(json.dumps(completion, indent=4, ensure_ascii=False))
+            completion = self.llm_client.chat.completions.create(
+                model=self.conf["llm_model"],
+                messages=messages
+            ).to_dict()
 
+            print(json.dumps(completion, indent=4, ensure_ascii=False))
+            for raw in completion["choices"][0]["message"]["content"].split("```"):
+                if raw.startswith("json"):
+                    raw = raw[4:].strip()
+                raw = raw.strip()
+                if raw.startswith("{") and raw.endswith("}"):
+                    questions.append(json.loads(raw))
+            
+            if len(questions) >= number:
+                break
+
+        return questions
 
     def reslove(self, question):
         pass
@@ -81,8 +96,9 @@ if __name__ == "__main__":
 
     agent = ExecutorAgent("/etc/gitops.yaml")
 
-    agent.ask("帮我看一下今天aliyun有什么新闻")
+    questions = agent.ask("帮我看一下今天aliyun有什么新闻", number=3)
 
+    print(questions)
     # next_loop = True
     # count = 0
     # while next_loop:

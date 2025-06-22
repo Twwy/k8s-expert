@@ -5,8 +5,11 @@ on:
     types: [opened]
 
 jobs:
-  create_thought_branch:
+  create_thought_stack:
     runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
+    container:
+      image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-explorer:latest
+
     outputs:
       start_commit: ${{ steps.create_branch.outputs.start_commit }}
       
@@ -21,18 +24,30 @@ jobs:
       - id: create_branch
         name: Push thought branch
         run: |
+          set -e
+          ROOT_PATH=$(pwd)
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-          timestamp=$(date +%s)
-          rm chat
-          mkdir chat
-          mkdir "chat/user_${timestamp}"
-          echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "chat/user_${timestamp}/message.md"
-          git add chat
-          git commit -m "init task"
+          git config --global --add safe.directory ${ROOT_PATH}
+
+          cat <<DELIMITER > /etc/gitops.yaml
+          llm_model: qwen-max
+          llm_api_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+          llm_api_key: ${{secrets.DASHSCOPE_API_KEY}}
+          workspace_path: $(pwd)/workspace
+          task_path: $(pwd)/task
+          DELIMITER
+
+          rm $(pwd)/workspace
+          mkdir $(pwd)/workspace
+          echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "$(pwd)/workspace/input.md"
+
+          python3 agent/explorer/explorer.agent.py ask
+
+          git add .
+          git commit -m "init stack"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY
-          echo "start_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
       - uses: actions/github-script@v6
         id: create_comment
         with:

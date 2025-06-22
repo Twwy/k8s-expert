@@ -75,6 +75,7 @@ class ExecutorAgent():
                 sys.exit(1)
 
         self.workspace_path = self.conf["workspace_path"]
+        self.task_path = self.conf["task_path"]
         with open(os.path.join(self.workspace_path, "input.md"), 'r') as f:
             self.requirement = f.read()
 

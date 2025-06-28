@@ -135,6 +135,8 @@ class ExecutorAgent():
             os.remove(self.task_path)
             os.makedirs(self.task_path, exist_ok=True)
 
+            with open(os.path.join(self.task_path, "stack.json"), 'w') as f:
+                f.write(json.dumps(stackData, indent=4, ensure_ascii=False))
         else:
             with open(os.path.join(self.task_path, "stack.json"), 'r') as f:
                 stackData = json.loads(f.read())

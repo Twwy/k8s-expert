@@ -1,0 +1,42 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 4,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "今天阿里云的具体新闻来源或类型您有指定吗？例如，是关于产品更新、市场活动还是战略合作等？",
+                        "answer_deliverable": []
+                    },
+                    "task": "task0"
+                },
+                {
+                    "question": {
+                        "question": "为了提供最新的阿里云新闻，我需要访问哪些特定的资源或网站？",
+                        "answer_deliverable": [
+                            "aliyun官网",
+                            "tech新闻网站上关于阿里云的信息"
+                        ]
+                    },
+                    "task": "task1"
+                },
+                {
+                    "question": {
+                        "question": "您是希望查询阿里云官方网站上发布的新信息呢，还是包括所有与阿里云有关的媒体报道？",
+                        "answer_deliverable": []
+                    },
+                    "task": "task2"
+                },
+                {
+                    "question": {
+                        "question": "是否有特定类型的新闻或话题领域是你感兴趣的？比如产品更新、合作动态等。",
+                        "answer_deliverable": []
+                    },
+                    "task": "task3"
+                }
+            ]
+        }
+    ]
+}

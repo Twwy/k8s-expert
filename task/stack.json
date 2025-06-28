@@ -1,0 +1,36 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "今天的阿里云新闻具体是关于哪个领域的，比如产品更新、企业合作、技术发展等？",
+                        "answer_deliverable": []
+                    },
+                    "task": "task0"
+                },
+                {
+                    "question": {
+                        "question": "您能否分享一个或几个您已知的、具体的今日有关阿里云新闻来源？这样或许我能根据给定的信息帮您总结。",
+                        "answer_deliverable": [
+                            "关于阿里云新闻的分析"
+                        ]
+                    },
+                    "task": "task1"
+                },
+                {
+                    "question": {
+                        "question": "您指的是阿里巴巴云（阿里云）的官方新闻更新吗？例如产品发布、技术进步或是其他特定领域的资讯？",
+                        "answer_deliverable": [
+                            "阿里云今日新闻汇总报告"
+                        ]
+                    },
+                    "task": "task2"
+                }
+            ]
+        }
+    ]
+}

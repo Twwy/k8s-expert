@@ -106,6 +106,8 @@ class ExecutorAgent():
             "loop": stackData["loopCnt"],
             "tasks": []
         }
+
+        tasks = []
         for question in questions:
             taskName = f"task{stackData['taskCnt']}"
             task_path = os.path.join(self.task_path, taskName)
@@ -114,9 +116,10 @@ class ExecutorAgent():
                 f.write(json.dumps(question, indent=4, ensure_ascii=False))
 
             stackData["taskCnt"] += 1
+            tasks.append(taskName)
             stackLoop["tasks"].append({
                 "question": question,
-                "task": f"task{stackData['taskCnt']}",
+                "task": taskName,
                 "status": "pending",
             })
 
@@ -124,6 +127,10 @@ class ExecutorAgent():
 
         with open(os.path.join(self.task_path, "stack.json"), 'w') as f:
             f.write(json.dumps(stackData, indent=4, ensure_ascii=False))
+
+        with open(os.path.join(self.task_path, "todo-task"), 'w') as f:
+            f.write("\n".join(tasks))
+
         
 
     def reflect(self, number=3):

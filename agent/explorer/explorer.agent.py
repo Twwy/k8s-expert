@@ -126,7 +126,7 @@ class ExecutorAgent():
             f.write(json.dumps(stackData, indent=4, ensure_ascii=False))
         
 
-    def ask(self, number=3):
+    def reflect(self, number=3):
         messages = [{"role": "system", "content": self.sys_prompt}]
 
         questions = []
@@ -217,14 +217,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="智能体")
     subparsers = parser.add_subparsers(dest="command")
 
-    agent_parser = subparsers.add_parser("ask", help="提问")
+    agent_parser = subparsers.add_parser("reflect", help="反思")
     agent_parser = subparsers.add_parser("reslove", help="解决")
     agent_parser.add_argument("--task-path", help="任务目录", required=True)
 
     args = parser.parse_args()
 
-    if args.command == "ask":
-        agent.ask()
+    if args.command == "reflect":
+        agent.reflect()
     elif args.command == "reslove":
         agent.reslove(args.task_path)
     else:

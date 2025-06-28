@@ -1,0 +1,35 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "您希望了解阿里巴巴云今天的哪些具体新闻类型？例如：产品更新、市场动态、合作伙伴等。",
+                        "answer_deliverable": []
+                    },
+                    "task": "task0"
+                },
+                {
+                    "question": {
+                        "question": "请问您是希望了解阿里云今天的官方新闻发布，还是包括一些与阿里云相关的媒体报道？",
+                        "answer_deliverable": [
+                            "阿里云今日新闻汇总",
+                            "相关报道链接"
+                        ]
+                    },
+                    "task": "task1"
+                },
+                {
+                    "question": {
+                        "question": "您希望了解阿里巴巴云(Aliyun)哪方面的新闻？比如新产品发布、安全更新或者其他特定类型的新闻。",
+                        "answer_deliverable": []
+                    },
+                    "task": "task2"
+                }
+            ]
+        }
+    ]
+}

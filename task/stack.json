@@ -1,0 +1,42 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "如何获取今天阿里云的新闻?",
+                        "answer_deliverable": [
+                            "访问阿里云官网并检查其新闻板块",
+                            "搜索网上的最新报道"
+                        ]
+                    },
+                    "task": "task0"
+                },
+                {
+                    "question": {
+                        "question": "如何确保获取到的新闻是最新且准确的?",
+                        "answer_deliverable": [
+                            "验证新闻发布日期",
+                            "从多个可靠来源交叉核对信息"
+                        ]
+                    },
+                    "task": "task1"
+                },
+                {
+                    "question": {
+                        "question": "如何订阅或设置提醒以获取阿里云的最新新闻?",
+                        "answer_deliverable": [
+                            "在阿里云官网订阅新闻通讯",
+                            "使用RSS订阅工具关注阿里云的新闻频道",
+                            "设置Google Alerts等通知服务追踪阿里云相关新闻"
+                        ]
+                    },
+                    "task": "task2"
+                }
+            ]
+        }
+    ]
+}

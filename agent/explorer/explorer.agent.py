@@ -40,7 +40,7 @@ class ToolBash():
 class ExecutorAgent():
     sys_prompt = "你是一个任务专家"
     reflect_prompt = """
-<requirement>中是用户提出需求，在完成这个需求的过程中，你可能会遇到什么问题，请选择最重要的一个问题提出来，这个问题不要重复用户的问题，使用JSON格式返回。
+<requirement>中是用户提出需求，<result>是已经完成的任务结果。如果任务已满足需求，请返回『满足』，否则的话，请将不满足的部分使用问题形态提出来，如果有多个请选择最重要的一个问题提出来，这个问题不要重复用户的问题，使用JSON格式返回。
 返回JSON必须包含字段:
 - question 问题
 - answer_deliverable 答案交付物清单，使用数组
@@ -147,22 +147,23 @@ class ExecutorAgent():
     def reflect(self, number=3):
         stackData = self.read_stack_task()
 
+        messages = [{"role": "system", "content": self.sys_prompt}]
+
+        taskResult = ""
         if len(stackData["stack"]) > 0:
             lastStack = stackData["stack"][-1]
             for task in lastStack["tasks"]:
                 if not os.path.isfile(os.path.join(self.task_path, task["task"], "output.md")):
                     print(f"当前有未完成的任务: {task['task']}")
-                    return
-
-            print("开始分析这轮的结果")
-            sys.ext(1)
-
-        messages = [{"role": "system", "content": self.sys_prompt}]
-
+                    
+                    with open(os.path.join(self.task_path, task["task"], "output.md"), 'r') as f:
+                        task["result"] = f.read()
+            taskResult = f"<result>{json.dumps(stackData)}</result>"
+        
         questions = []
         for i in range(number):
             if i == 0:
-                messages.append({"role": "user", "content": f"<requirement>{self.requirement}</requirement>{self.reflect_prompt}"})
+                messages.append({"role": "user", "content": f"<requirement>{self.requirement}</requirement>{taskResult}{self.reflect_prompt}"})
             else:
                 messages.append({"role": "user", "content": f"除了这个问题，还有其他什么问题吗？不要和前面已有的问题完全重复。请继续使用包含 question,answer_deliverable 的JSON返回"})
 

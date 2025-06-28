@@ -155,9 +155,9 @@ class ExecutorAgent():
         self.append_stack_task(questions)
         return questions
 
-    def reslove(self, task_path, max_steps=30):
+    def reslove(self, taskName, max_steps=30):
 
-        with open(task_path, 'r') as f:
+        with open(os.path.join(self.task_path, taskName, "input.json"), 'r') as f:
             task = json.loads(f.read())
 
         messages = [
@@ -206,6 +206,9 @@ class ExecutorAgent():
                 finalAnswer = callThought
                 break
         
+        with open(os.path.join(self.task_path, taskName, "output.md"), 'w') as f:
+            f.write(finalAnswer)
+
         return finalAnswer
 
 
@@ -219,14 +222,14 @@ if __name__ == "__main__":
 
     agent_parser = subparsers.add_parser("reflect", help="反思")
     agent_parser = subparsers.add_parser("reslove", help="解决")
-    agent_parser.add_argument("--task-path", help="任务目录", required=True)
+    agent_parser.add_argument("--task", help="待解决任务名", required=True)
 
     args = parser.parse_args()
 
     if args.command == "reflect":
         agent.reflect()
     elif args.command == "reslove":
-        agent.reslove(args.task_path)
+        agent.reslove(args.task)
     else:
         print("unknown command")
         sys.exit(1)

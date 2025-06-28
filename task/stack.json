@@ -1,6 +1,6 @@
 {
-    "loopCnt": 2,
-    "taskCnt": 6,
+    "loopCnt": 3,
+    "taskCnt": 9,
     "stack": [
         {
             "loop": 1,
@@ -58,6 +58,38 @@
                         ]
                     },
                     "task": "task5"
+                }
+            ]
+        },
+        {
+            "loop": 3,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "您希望了解的具体新闻类别是什么？例如：某个特定产品或服务更新、最新的市场活动信息等。",
+                        "answer_deliverable": [
+                            "具体新闻类别"
+                        ]
+                    },
+                    "task": "task6"
+                },
+                {
+                    "question": {
+                        "question": "请问您希望了解阿里云的哪方面的最新活动或更新？例如，是否有关注具体产品发布、合作伙伴关系、技术发展等特定领域的内容？",
+                        "answer_deliverable": [
+                            "指定领域的阿里云新闻更新"
+                        ]
+                    },
+                    "task": "task7"
+                },
+                {
+                    "question": {
+                        "question": "您能否提供一个具体的阿里云产品或服务名称，以便我能更有针对性地查询其相关新闻和更新？",
+                        "answer_deliverable": [
+                            "特定产品/服务相关新闻"
+                        ]
+                    },
+                    "task": "task8"
                 }
             ]
         }

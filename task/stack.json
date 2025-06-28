@@ -1,6 +1,6 @@
 {
-    "loopCnt": 1,
-    "taskCnt": 3,
+    "loopCnt": 2,
+    "taskCnt": 6,
     "stack": [
         {
             "loop": 1,
@@ -28,6 +28,36 @@
                         "answer_deliverable": []
                     },
                     "task": "task2"
+                }
+            ]
+        },
+        {
+            "loop": 2,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "您希望了解的阿里云今日新闻具体是关于哪个方面的？比如：产品更新、市场动态、合作伙伴等。",
+                        "answer_deliverable": []
+                    },
+                    "task": "task3"
+                },
+                {
+                    "question": {
+                        "question": "根据您的需求，您希望直接获取今天阿里云的官方新闻或是具体某方面的更新吗？比如产品更新、安全更新或者其他特定类型的新消息。",
+                        "answer_deliverable": [
+                            "今天阿里云具体的新闻更新类别"
+                        ]
+                    },
+                    "task": "task4"
+                },
+                {
+                    "question": {
+                        "question": "您能否具体指出想了解的阿里云新闻内容类型？例如，是否关注某个特定产品或服务更新、最新的市场活动信息还是其他特定方面的最新动态?",
+                        "answer_deliverable": [
+                            "具体新闻类别"
+                        ]
+                    },
+                    "task": "task5"
                 }
             ]
         }

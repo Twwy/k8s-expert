@@ -147,7 +147,8 @@ class ExecutorAgent():
 
             completion = self.llm_client.chat.completions.create(
                 model=self.conf["llm_model"],
-                messages=messages
+                messages=messages,
+                temperature=1.5
             ).to_dict()
 
             print(json.dumps(completion, indent=4, ensure_ascii=False))

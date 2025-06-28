@@ -1,0 +1,47 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 4,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "今天阿里云的具体新闻内容是什么？",
+                        "answer_deliverable": [
+                            "今天阿里云的新闻详情"
+                        ]
+                    },
+                    "task": "task0"
+                },
+                {
+                    "question": {
+                        "question": "如何获取今天阿里云的新闻信息？",
+                        "answer_deliverable": [
+                            "今天阿里云的新闻列表"
+                        ]
+                    },
+                    "task": "task1"
+                },
+                {
+                    "question": {
+                        "question": "您是否有特定想要了解的新闻主题或类别？例如产品更新、市场动态等。",
+                        "answer_deliverable": [
+                            "特定新闻主题或类别"
+                        ]
+                    },
+                    "task": "task2"
+                },
+                {
+                    "question": {
+                        "question": "您是否可以接受通过其他渠道接收最新信息？例如订阅邮件列表、访问官方博客或是社交媒体账户。",
+                        "answer_deliverable": [
+                            "可接受的替代信息渠道"
+                        ]
+                    },
+                    "task": "task3"
+                }
+            ]
+        }
+    ]
+}

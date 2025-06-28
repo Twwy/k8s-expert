@@ -1,0 +1,44 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "如何准确地获取并筛选出与阿里云相关的最新新闻？",
+                        "answer_deliverable": [
+                            "一份汇总了当天阿里云相关新闻的文档",
+                            "对每条新闻简短且关键的摘要"
+                        ]
+                    },
+                    "task": "task0",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "我应该使用哪种方法或工具来准确获取今天阿里云的相关新闻？",
+                        "answer_deliverable": [
+                            "收集和验证新闻来源的列表",
+                            "推荐使用的搜索引擎或新闻聚合工具"
+                        ]
+                    },
+                    "task": "task1",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "如何判断找到的信息是最新的并且相关的?",
+                        "answer_deliverable": [
+                            "提供确认新闻时效性的策略",
+                            "筛选并验证信息可靠性的指导"
+                        ]
+                    },
+                    "task": "task2",
+                    "status": "pending"
+                }
+            ]
+        }
+    ]
+}

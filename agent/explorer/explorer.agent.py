@@ -89,17 +89,8 @@ class ExecutorAgent():
         )
 
     def append_stack_task(self, questions):
-        stackData = {
-            "loopCnt": 0,
-            "taskCnt": 0,
-            "stack": []
-        }
-        if os.path.isfile(self.task_path):
-            os.remove(self.task_path)
-            os.makedirs(self.task_path, exist_ok=True)
-        else:
-            with open(os.path.join(self.task_path, "stack.json"), 'r') as f:
-                stackData = json.loads(f.read())
+
+        stackData = self.read_stack_task()
 
         stackData["loopCnt"] += 1
         stackLoop = {
@@ -122,7 +113,6 @@ class ExecutorAgent():
             stackLoop["tasks"].append({
                 "question": question,
                 "task": taskName,
-                "status": "pending",
             })
 
         stackData["stack"].append(stackLoop)
@@ -132,10 +122,39 @@ class ExecutorAgent():
 
         with open(os.path.join(self.task_path, "todo-task"), 'w') as f:
             f.write("\n".join(tasks)+"\n")
+    
+    def read_stack_task(self):
 
-        
+        stackData = {
+            "loopCnt": 0,
+            "taskCnt": 0,
+            "stack": []
+        }
+
+        if os.path.isfile(self.task_path):
+            os.remove(self.task_path)
+            os.makedirs(self.task_path, exist_ok=True)
+
+        else:
+            with open(os.path.join(self.task_path, "stack.json"), 'r') as f:
+                stackData = json.loads(f.read())
+
+        return stackData
+
 
     def reflect(self, number=3):
+        stackData = self.read_stack_task()
+
+        if len(stackData["stack"]) > 0:
+            lastStack = stackData["stack"][-1]
+            for task in lastStack["tasks"]:
+                if not os.path.isfile(os.path.join(self.task_path, task["task"], "output.md")):
+                    print(f"当前有未完成的任务: {task['task']}")
+                    return
+
+            print("开始分析这轮的结果")
+            sys.ext(1)
+
         messages = [{"role": "system", "content": self.sys_prompt}]
 
         questions = []

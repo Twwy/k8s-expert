@@ -1,12 +1,12 @@
-name: Explorer
+name: Reflect
 
 on:
  push:
    branches:
-     - 'explorer/**/**'
+     - 'issue-**'
 
 jobs:
-  execute:
+  plan:
     runs-on: ubuntu-latest # 在最新的 Ubuntu runner 上运行
     container:
       image: ghcr.io/twwy/${{ github.event.repository.name }}/runtime-explorer:latest
@@ -20,18 +20,13 @@ jobs:
         with:
           token: ${{ secrets.GIT_REPO_TOKEN }}
           fetch-depth: 0
-        
-      - name: Resolve task 
+
+      - name: Reflect problem
         run: |
 
-
           set -e
-
           EXEC_BRANCH="${{github.ref_name}}"
-          TASK_NAME=$(echo "$EXEC_BRANCH" | cut -d'/' -f2)
-          SRC_BRANCH="${EXEC_BRANCH##*/}"
           ROOT_PATH=$(pwd)
-
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "{{ github.actor }}"
           git config --global --add safe.directory ${ROOT_PATH}
@@ -44,24 +39,5 @@ jobs:
           task_path: $(pwd)/task
           DELIMITER
           
-          python3 agent/explorer/explorer.agent.py resolve --task "${TASK_NAME}"
-          
-          git add .
-          git commit -m "resolve ${TASK_NAME}"
-
-          # 尝试 push，失败则 pull --rebase 后重试
-          n=0
-          until [ $n -ge 10 ]
-          do
-            git push origin ${EXEC_BRANCH}:${SRC_BRANCH} && break
-            echo "git push 失败，尝试 git pull --rebase 并重试..."
-            git pull --rebase origin ${SRC_BRANCH}
-            n=$((n+1))
-          done
-
-          git push origin --delete ${EXEC_BRANCH}
-
-
-
-
+          python3 agent/explorer/explorer.agent.py reflect
 

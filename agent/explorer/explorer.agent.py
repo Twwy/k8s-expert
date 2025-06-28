@@ -155,9 +155,9 @@ class ExecutorAgent():
             for task in lastStack["tasks"]:
                 if not os.path.isfile(os.path.join(self.task_path, task["task"], "output.md")):
                     print(f"当前有未完成的任务: {task['task']}")
-                    
-                    with open(os.path.join(self.task_path, task["task"], "output.md"), 'r') as f:
-                        task["result"] = f.read()
+                    return 
+                with open(os.path.join(self.task_path, task["task"], "output.md"), 'r') as f:
+                    task["result"] = f.read()
             taskResult = f"<result>{json.dumps(stackData)}</result>"
         
         questions = []
@@ -173,6 +173,7 @@ class ExecutorAgent():
                 temperature=1.5
             ).to_dict()
 
+            print(json.dumps(messages, indent=4, ensure_ascii=False))
             print(json.dumps(completion, indent=4, ensure_ascii=False))
             for raw in completion["choices"][0]["message"]["content"].replace("\n\n", "```").split("```"):
                 if raw.startswith("json"):

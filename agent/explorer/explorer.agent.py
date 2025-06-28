@@ -39,7 +39,7 @@ class ToolBash():
 
 class ExecutorAgent():
     sys_prompt = "你是一个任务专家"
-    ask_prompt = """
+    reflect_prompt = """
 <requirement>中是用户提出需求，在完成这个需求的过程中，你可能会遇到什么问题，请选择最重要的一个问题提出来，这个问题不要重复用户的问题，使用JSON格式返回。
 返回JSON必须包含字段:
 - question 问题
@@ -132,7 +132,7 @@ class ExecutorAgent():
         questions = []
         for i in range(number):
             if i == 0:
-                messages.append({"role": "user", "content": f"<requirement>{self.requirement}</requirement>{self.ask_prompt}"})
+                messages.append({"role": "user", "content": f"<requirement>{self.requirement}</requirement>{self.reflect_prompt}"})
             else:
                 messages.append({"role": "user", "content": f"除了这个问题，还有其他什么问题吗？不要和前面已有的问题完全重复。请继续使用包含 question,answer_deliverable 的JSON返回"})
 

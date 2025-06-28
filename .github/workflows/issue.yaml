@@ -42,7 +42,7 @@ jobs:
           mkdir $(pwd)/workspace
           echo -e "${{ github.event.issue.title }}\n${{ github.event.issue.body }}" > "$(pwd)/workspace/input.md"
 
-          python3 agent/explorer/explorer.agent.py ask
+          python3 agent/explorer/explorer.agent.py reflect
 
           git add .
           git commit -m "init stack"

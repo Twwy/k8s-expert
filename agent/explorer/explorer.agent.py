@@ -171,7 +171,7 @@ class ExecutorAgent():
             ).to_dict()
 
             print(json.dumps(completion, indent=4, ensure_ascii=False))
-            for raw in completion["choices"][0]["message"]["content"].split("```"):
+            for raw in completion["choices"][0]["message"]["content"].replace("\n\n", "```").split("```"):
                 if raw.startswith("json"):
                     raw = raw[4:].strip()
                 raw = raw.strip()

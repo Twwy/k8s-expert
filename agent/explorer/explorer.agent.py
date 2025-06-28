@@ -109,6 +109,7 @@ class ExecutorAgent():
 
         tasks = []
         for question in questions:
+
             taskName = f"task{stackData['taskCnt']}"
             task_path = os.path.join(self.task_path, taskName)
             os.makedirs(task_path, exist_ok=True)
@@ -116,6 +117,7 @@ class ExecutorAgent():
                 f.write(json.dumps(question, indent=4, ensure_ascii=False))
 
             stackData["taskCnt"] += 1
+
             tasks.append(taskName)
             stackLoop["tasks"].append({
                 "question": question,

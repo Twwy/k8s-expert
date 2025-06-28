@@ -44,12 +44,12 @@ jobs:
           git add .
           git commit -m "reflect stack"
 
-          # 遍历 todo-task 文件中的每一行任务名，推送到 explorer/$(taskName)/issue-xxx 分支
+          # 遍历 todo-task 文件中的每一行任务名，推送到 explorer/$(taskName)/${EXEC_BRANCH}
           TODO_TASK_FILE="$(pwd)/task/todo-task"
           if [ -f "$TODO_TASK_FILE" ]; then
             while IFS= read -r taskName; do
               [ -z "$taskName" ] && continue
-              git push origin ${{github.ref_name}}:explorer/${taskName}/issue-${{ github.event.issue.number }}
+              git push origin ${{github.ref_name}}:explorer/${taskName}/${EXEC_BRANCH}
             done < "$TODO_TASK_FILE"
           fi
           rm -rf $(pwd)/task/todo-task

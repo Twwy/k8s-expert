@@ -1,0 +1,45 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "如何获取阿里云今天的最新新闻内容？",
+                        "answer_deliverable": [
+                            "阿里云官网今日新闻发布页面的链接",
+                            "今天发布的关于阿里云的主要新闻标题与简要内容列表"
+                        ]
+                    },
+                    "task": "task0",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "如何准确地获取阿里云今天发布的最新新闻？",
+                        "answer_deliverable": [
+                            "提供阿里云官方网站或官方社交媒体账号的链接",
+                            "列出今天阿里云发布的所有重要新闻标题和摘要"
+                        ]
+                    },
+                    "task": "task1",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "怎样确保提供的新闻信息是最新的且来源可靠？",
+                        "answer_deliverable": [
+                            "验证新闻发布的时间戳",
+                            "确认新闻来源是否为阿里云官方渠道",
+                            "提供新闻内容的直接链接或引用"
+                        ]
+                    },
+                    "task": "task2",
+                    "status": "pending"
+                }
+            ]
+        }
+    ]
+}

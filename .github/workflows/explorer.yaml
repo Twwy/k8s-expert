@@ -44,7 +44,7 @@ jobs:
           task_path: $(pwd)/task
           DELIMITER
           
-          python3 -m agitops.agent.explorer resolve --task "${TASK_NAME}"
+          python3 agent/explorer/explorer.agent.py resolve --task "${TASK_NAME}"
           
           git push origin ${EXEC_BRANCH}:${SRC_BRANCH}
           git push origin --delete ${EXEC_BRANCH}

@@ -129,7 +129,7 @@ class ExecutorAgent():
             f.write(json.dumps(stackData, indent=4, ensure_ascii=False))
 
         with open(os.path.join(self.task_path, "todo-task"), 'w') as f:
-            f.write("\n".join(tasks))
+            f.write("\n".join(tasks)+"\n")
 
         
 

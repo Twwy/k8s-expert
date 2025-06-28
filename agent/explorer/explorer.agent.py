@@ -45,7 +45,7 @@ class ExecutorAgent():
 - question 问题
 - answer_deliverable 答案交付物清单，使用数组
 """
-    reslove_prompt = """
+    resolve_prompt = """
 <requirement>中是用户提出需求。<task>是你本次需要完成解决的问题，最终请按照 answer_deliverable 的要求交付结果。
 """
 
@@ -164,14 +164,14 @@ class ExecutorAgent():
         self.append_stack_task(questions)
         return questions
 
-    def reslove(self, taskName, max_steps=30):
+    def resolve(self, taskName, max_steps=30):
 
         with open(os.path.join(self.task_path, taskName, "input.json"), 'r') as f:
             task = json.loads(f.read())
 
         messages = [
             {"role": "system", "content": self.sys_prompt},
-            {"role": "user", "content": f"<requirement>{self.requirement}</requirement><task>{task}</task>{self.reslove_prompt}"}
+            {"role": "user", "content": f"<requirement>{self.requirement}</requirement><task>{task}</task>{self.resolve_prompt}"}
         ]
 
         finalAnswer = None
@@ -230,15 +230,15 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers(dest="command")
 
     agent_parser = subparsers.add_parser("reflect", help="反思")
-    agent_parser = subparsers.add_parser("reslove", help="解决")
+    agent_parser = subparsers.add_parser("resolve", help="解决")
     agent_parser.add_argument("--task", help="待解决任务名", required=True)
 
     args = parser.parse_args()
 
     if args.command == "reflect":
         agent.reflect()
-    elif args.command == "reslove":
-        agent.reslove(args.task)
+    elif args.command == "resolve":
+        agent.resolve(args.task)
     else:
         print("unknown command")
         sys.exit(1)

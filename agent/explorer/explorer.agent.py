@@ -168,6 +168,8 @@ class ExecutorAgent():
             if i == 0:
                 messages.append({"role": "user", "content": f"<requirement>{self.requirement}</requirement>{taskResult}{self.reflect_prompt}"})
             else:
+                for question in questions:
+                    messages.append({"role": "assistant", "content": json.dumps(question, ensure_ascii=False)})
                 messages.append({"role": "user", "content": f"除了这个问题，还有其他什么问题吗？不要和前面已有的问题完全重复。请继续使用包含 question,answer_deliverable 的JSON返回"})
 
             completion = self.llm_client.chat.completions.create(

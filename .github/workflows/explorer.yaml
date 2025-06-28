@@ -49,10 +49,19 @@ jobs:
           git add .
           git commit -m "resolve ${TASK_NAME}"
 
-          git push origin ${EXEC_BRANCH}:${SRC_BRANCH}
+          # 尝试 push，失败则 pull --rebase 后重试
+          n=0
+          until [ $n -ge 10 ]
+          do
+            git push origin ${EXEC_BRANCH}:${SRC_BRANCH} && break
+            echo "git push 失败，尝试 git pull --rebase 并重试..."
+            git pull --rebase origin ${SRC_BRANCH}
+            n=$((n+1))
+          done
+
           git push origin --delete ${EXEC_BRANCH}
 
-      
+
 
 
 

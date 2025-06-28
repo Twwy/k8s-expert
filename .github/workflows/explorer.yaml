@@ -46,6 +46,9 @@ jobs:
           
           python3 agent/explorer/explorer.agent.py resolve --task "${TASK_NAME}"
           
+          git add .
+          git commit -m "resolve ${TASK_NAME}"
+
           git push origin ${EXEC_BRANCH}:${SRC_BRANCH}
           git push origin --delete ${EXEC_BRANCH}
 

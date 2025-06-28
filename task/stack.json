@@ -1,0 +1,32 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "今天阿里云有哪些具体的新闻内容您想要了解？比如产品更新、技术发布等。",
+                        "answer_deliverable": []
+                    },
+                    "task": "task0"
+                },
+                {
+                    "question": {
+                        "question": "您是否需要了解这些新闻的具体来源或者链接？",
+                        "answer_deliverable": []
+                    },
+                    "task": "task1"
+                },
+                {
+                    "question": {
+                        "question": "您是否对阿里云的某个特定领域或产品线（如云计算、大数据、人工智能等）的新闻更感兴趣？",
+                        "answer_deliverable": []
+                    },
+                    "task": "task2"
+                }
+            ]
+        }
+    ]
+}

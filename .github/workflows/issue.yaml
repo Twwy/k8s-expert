@@ -48,6 +48,17 @@ jobs:
           git commit -m "init stack"
           git push origin ${{github.ref_name}}:issue-${{ github.event.issue.number }}
           echo "Create branch: [issue-${{ github.event.issue.number }}](${{ github.server_url }}/${{ github.repository }}/tree/issue-${{ github.event.issue.number }}) [Actions](${{ github.server_url }}/${{ github.repository }}/actions?query=branch%3Aissue-${{ github.event.issue.number }})" >> $GITHUB_STEP_SUMMARY
+
+          # 遍历 todo-task 文件中的每一行任务名，推送到 explorer/$(taskName)/issue-xxx 分支
+          TODO_TASK_FILE="$(pwd)/task/todo-task"
+          EXEC_BRANCH="issue-${{ github.event.issue.number }}"
+          if [ -f "$TODO_TASK_FILE" ]; then
+            while IFS= read -r taskName; do
+              [ -z "$taskName" ] && continue
+              git push origin ${EXEC_BRANCH}:explorer/${taskName}/issue-${{ github.event.issue.number }}
+            done < "$TODO_TASK_FILE"
+          fi
+
       - uses: actions/github-script@v6
         id: create_comment
         with:

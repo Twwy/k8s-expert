@@ -158,7 +158,10 @@ class ExecutorAgent():
                     return 
                 with open(os.path.join(self.task_path, task["task"], "output.md"), 'r') as f:
                     task["result"] = f.read()
-            taskResult = f"<result>{json.dumps(stackData)}</result>"
+            
+            with open(os.path.join(self.task_path, "stack.json"), 'w') as f:
+                f.write(json.dumps(stackData, indent=4, ensure_ascii=False))
+            taskResult = f"<result>{json.dumps(stackData, ensure_ascii=False)}</result>"
         
         questions = []
         for i in range(number):

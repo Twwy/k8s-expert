@@ -1,0 +1,42 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "如何获取阿里云今天的最新新闻动态？",
+                        "answer_deliverable": [
+                            "提供今天阿里云官方网站或官方社交媒体账号发布的最新消息链接",
+                            "总结今天关于阿里云的主要新闻标题及简要内容"
+                        ]
+                    },
+                    "task": "task0",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "阿里云新闻可能涉及多个领域，如云计算、大数据、人工智能等，请问您对哪个领域的新闻更感兴趣？",
+                        "answer_deliverable": [
+                            "根据用户兴趣筛选后的阿里云相关新闻列表"
+                        ]
+                    },
+                    "task": "task1",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "您希望通过哪种方式接收这些新闻信息？例如：链接汇总、文字摘要或是邮件形式。",
+                        "answer_deliverable": [
+                            "按照指定格式整理好的阿里云相关新闻"
+                        ]
+                    },
+                    "task": "task2",
+                    "status": "pending"
+                }
+            ]
+        }
+    ]
+}

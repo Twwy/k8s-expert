@@ -231,15 +231,29 @@ class ExecutorAgent():
                     print(f"call thought: {callThought}")
                     print(f"exec tool {tool_call}")
                     tool_name = tool_call.get("function", {}).get("name")
-                    arguments = json.loads(tool_call.get("function", {}).get("arguments", "{}"))
-                    tool_result = self.tools[tool_name].run(arguments=arguments)
-                    message = {
-                        "role": "tool",
-                        "tool_call_id": tool_call["id"],
-                        "content": tool_result
-                    }
-                    print(f"exec tool result {message}")
-                    messages.append(message)
+                    argumentsError = False
+                    try:
+                        arguments = json.loads(tool_call.get("function", {}).get("arguments", "{}"))
+                    except json.JSONDecodeError as e:
+                        print(f"Error decoding JSON arguments: {e}")
+                        argumentsError = True
+                    
+                    if argumentsError is False:
+                        tool_result = self.tools[tool_name].run(arguments=arguments)
+                        message = {
+                            "role": "tool",
+                            "tool_call_id": tool_call["id"],
+                            "content": tool_result
+                        }
+                        print(f"exec tool result {message}")
+                        messages.append(message)
+                    else:
+                        message = {
+                            "role": "tool",
+                            "tool_call_id": tool_call["id"],
+                            "content": "Error decoding JSON arguments"
+                        }
+                        messages.append(message)
             else:
                 finalAnswer = callThought
                 break

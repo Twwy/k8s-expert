@@ -1,0 +1,42 @@
+{
+    "loopCnt": 1,
+    "taskCnt": 3,
+    "stack": [
+        {
+            "loop": 1,
+            "tasks": [
+                {
+                    "question": {
+                        "question": "如何获取最新的阿里云新闻？",
+                        "answer_deliverable": [
+                            "提供今天阿里云的最新新闻链接",
+                            "总结今天阿里云的主要新闻内容"
+                        ]
+                    },
+                    "task": "task1",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "如何获取最新的阿里云新闻更新？",
+                        "answer_deliverable": [
+                            "一份包含今日阿里云最新新闻或公告的文档"
+                        ]
+                    },
+                    "task": "task2",
+                    "status": "pending"
+                },
+                {
+                    "question": {
+                        "question": "是否需要特定类型的阿里云新闻，比如产品更新、服务状态变更或是公司动态等？",
+                        "answer_deliverable": [
+                            "根据指定类型整理的阿里云相关新闻列表"
+                        ]
+                    },
+                    "task": "task3",
+                    "status": "pending"
+                }
+            ]
+        }
+    ]
+}

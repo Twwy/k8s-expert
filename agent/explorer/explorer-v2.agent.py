@@ -43,7 +43,7 @@ class ExecutorAgent():
             "system": "你是一个任务专家，请解决<requirement>中用户提出需求",
         },
         "reflect": {
-            "system": "",
+            "system": "你是一个任务专家，我们当前在解决<requirement>中用户提出需求，<contenxt>是一次解决问题的上下文。",
         }
     }
 
@@ -91,7 +91,7 @@ class ExecutorAgent():
 
         messages = [
             {"role": "system", "content": self.prompt["reslove"]["system"]},
-            {"role": "user", "content": f"<requirement>{self.requirement}</requirement>"}
+            {"role": "user", "content": f"<requirement>{self.requirement}</requirement>"},
         ]
 
         finalAnswer = None
@@ -136,9 +136,31 @@ class ExecutorAgent():
                 break
         
         with open(os.path.join(task_path, 'context.json'), 'w') as f:
-            f.write(messages)
+            f.write(json.dumps(messages, indent=4, ensure_ascii=False))
 
         return finalAnswer
+
+    def reflect(self, task_path):
+
+        with open(os.path.join(task_path, 'context.json'), 'r') as f:
+            context = f.read()
+
+        messages = [
+            {"role": "system", "content": self.prompt["reslove"]["system"]},
+            {"role": "user", "content": f"<requirement>{self.requirement}</requirement>\n<context>{context}</context>"},
+            {"role": "user", "content": "请你对这个上下文进行反思，使用Q&A的方式总结客观经验，请尽可能保留tool调用的参数信息，为了下次解决问题使用不再重复犯错。使用JSON Array返回，每个item中包含question和answer两个字段"},
+        ]
+
+        completion = self.llm_client.chat.completions.create(
+            model=self.conf["llm_model"],
+            messages=messages
+        ).to_dict()
+
+        print(json.dumps(completion, indent=4, ensure_ascii=False))
+
+        content = completion["choices"][0].get("message")["content"]
+        print(content)
+
 
 
 if __name__ == "__main__":
@@ -148,14 +170,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="智能体")
     subparsers = parser.add_subparsers(dest="command")
 
-    agent_parser = subparsers.add_parser("reflect", help="反思")
-    agent_parser = subparsers.add_parser("reslove", help="解决")
-    agent_parser.add_argument("--task-path", help="任务目录", required=True)
+    reflect_parser = subparsers.add_parser("reflect", help="反思")
+    reflect_parser.add_argument("--task-path", help="任务目录", required=True)
+    reslove_parser = subparsers.add_parser("reslove", help="解决")
+    reslove_parser.add_argument("--task-path", help="任务目录", required=True)
 
     args = parser.parse_args()
 
     if args.command == "reflect":
-        agent.reflect()
+        agent.reflect(args.task_path)
     elif args.command == "reslove":
         agent.reslove(args.task_path)
     else:

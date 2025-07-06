@@ -40,7 +40,7 @@ class ToolBash():
 class ExecutorAgent():
     prompt = {
         "reslove": {
-            "system": "你是一个任务专家，请解决<requirement>中用户提出需求",
+            "system": "你是一个任务专家，请解决<requirement>中用户提出需求，你不是一次执行任务，<experience>是前面经验总结",
         },
         "reflect": {
             "system": "你是一个任务专家，我们当前在解决<requirement>中用户提出需求，<contenxt>是一次解决问题的上下文。",
@@ -89,10 +89,27 @@ class ExecutorAgent():
 
     def reslove(self, task_path, max_steps=30):
 
+        # 判断workspace下面有exp目录，如果有的话遍历该目录读取所有的json
+        exp_dir = os.path.join(self.workspace_path, "exp")
+        exp_jsons = []
+        if os.path.isdir(exp_dir):
+            for fname in os.listdir(exp_dir):
+                if fname.endswith('.json'):
+                    fpath = os.path.join(exp_dir, fname)
+                    try:
+                        with open(fpath, 'r', encoding='utf-8') as jf:
+                            exp_jsons.append(json.load(jf))
+                    except Exception as e:
+                        print(f"读取 {fpath} 失败: {e}")
+        # exp_jsons 变量现在包含了所有exp目录下的json内容
+
+
         messages = [
             {"role": "system", "content": self.prompt["reslove"]["system"]},
-            {"role": "user", "content": f"<requirement>{self.requirement}</requirement>"},
+            {"role": "user", "content": f"<requirement>{self.requirement}</requirement><experience>{json.dumps(exp_jsons, ensure_ascii=False)}</experience>"},
         ]
+
+        print(messages)
 
         finalAnswer = None
 
@@ -145,10 +162,15 @@ class ExecutorAgent():
         with open(os.path.join(task_path, 'context.json'), 'r') as f:
             context = f.read()
 
+        reflectRequire = "请将tool调用相关内容总结为客观经验。总结的经验请只保留客观内容，不要包含太多的主观推测。\n"
+        reflectRequire += "如果tool调用对结果有帮助，则标记type=positive，尽可能多描述细节，使得下次其他智能体遇到类似场景可以参考你的成功案例。\n"
+        reflectRequire += "如果tool调用对结果没有帮助，则标记type=negative，用来描述遇到的困难，并且描述尽可能多的细节，使得其他智能体可以直接根据这些内容帮你解决困难。\n"
+        reflectRequire += "请将总结内容格式化为JSON Array，每个item中包含type, content两个字段，type可以是positive或negative，content就是总结的经验。\n"
+
         messages = [
             {"role": "system", "content": self.prompt["reslove"]["system"]},
             {"role": "user", "content": f"<requirement>{self.requirement}</requirement>\n<context>{context}</context>"},
-            {"role": "user", "content": "请你对这个上下文进行反思，使用Q&A的方式总结客观经验，请尽可能保留tool调用的参数信息，为了下次解决问题使用不再重复犯错。使用JSON Array返回，每个item中包含question和answer两个字段"},
+            {"role": "user", "content": reflectRequire,}
         ]
 
         completion = self.llm_client.chat.completions.create(
